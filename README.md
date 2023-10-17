@@ -34,7 +34,8 @@ In today's digital age, local shops often face the challenge of staying competit
 
 ### Prerequisites
 
-- Python (for PyQt)
-- PyQt5
+- Python
+- PySide6
 - Node.js (for the server)
+- SQLite (Desktop application)
 - MySQL (for the server database)
