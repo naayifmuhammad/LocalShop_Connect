@@ -1,29 +1,45 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import QObject
-from UI.LoginPage_ui import Ui_MainWindow
+from UI.LoginPage_ui import Ui_Login as Login
 from configurations.Config import Config
-from Functions.UI_Functions import *
+from modules import main, auth
 
 
-class MyMainWindow(QMainWindow):
-    
+########################    SLOTS    ########################
 
-            
+def login():
+    if (auth.authenticate(Login.label_LoginPage_username, Login.label_LoginPage_password)):
+        loginWindow.close()
+
+    else:
+        print("Auth failed")
+
+
+########################    SET SIGNALS    ########################
+# Login.pb_LoginPage_login.clicked.connect(login)
+
+
+class LoginWindow(QMainWindow):
+
     def __init__(self):
         super().__init__()
-        self.ui = Ui_MainWindow() 
-        self.ui.setupUi(self)  
-        UI_Functions.setTheme(self,Config.theme)
+        self.ui = Login()
+        self.ui.setupUi(self)
+        main.setTheme(self, Config.theme)
 
-        #########################
-        ##buttons and actions
-        self.ui.pb_LoginPage_theme_change.clicked.connect(UI_Functions.btn_pb_LoginPage_theme_change)
 
-        #########################
+class Dashboard(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+        self.ui = Login()
+        self.ui.setupUi(self)
+        main.setTheme(self, Config.theme)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    main_window = MyMainWindow()
-    main_window.show()
+    loginWindow = LoginWindow()
+    loginWindow.show()
     sys.exit(app.exec())

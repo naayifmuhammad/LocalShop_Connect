@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Login</class>
+ <widget class="QMainWindow" name="Login">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>809</width>
-    <height>511</height>
+    <height>392</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,8 +49,8 @@
       <property name="formAlignment">
        <set>Qt::AlignCenter</set>
       </property>
-      <item row="1" column="0" colspan="2">
-       <widget class="QLabel" name="label">
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="label_login_heading">
         <property name="font">
          <font>
           <family>Reem Kufi</family>
@@ -65,41 +65,34 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QLineEdit" name="lineEdit_2">
+      <item row="1" column="0" colspan="2">
+       <widget class="QLineEdit" name="le_loginPage_username">
         <property name="placeholderText">
          <string>Enter username</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="QLineEdit" name="lineEdit">
+      <item row="2" column="0" colspan="2">
+       <widget class="QLineEdit" name="le_loginPage_password">
         <property name="placeholderText">
          <string>Enter password</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
-       <widget class="QPushButton" name="pushButton">
+      <item row="3" column="0" colspan="2">
+       <widget class="QPushButton" name="pb_LoginPage_login">
         <property name="text">
          <string>Login</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0" colspan="2">
-       <widget class="QLabel" name="label_2">
+      <item row="4" column="0" colspan="2">
+       <widget class="QLabel" name="label_LoginPage_register">
         <property name="text">
          <string>Don't have an account? Register</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pb_LoginPage_theme_change">
-        <property name="text">
-         <string>Theme change</string>
         </property>
        </widget>
       </item>
