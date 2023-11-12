@@ -1,6 +1,38 @@
-QMainWindow{
-    background-color: #352b30
+/* Dark Theme Styles */
+
+/* General Styles */
+QWidget {
+    background-color: #121212; /* Dark background */
+    color: #fff; /* Light text */
+    font-family: Arial, sans-serif; /* Use a modern sans-serif font */
 }
-QPushButton{
-    background-color: #e747c2
+
+/* Buttons */
+QPushButton {
+    background-color: #3498db; /* Instagram blue for buttons */
+    color: #fff; /* White text on buttons */
+    border: 1px solid #3498db; /* Blue border for buttons */
+    padding: 8px 16px;
+    border-radius: 5px;
 }
+
+QPushButton:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+    border: 1px solid #2980b9; /* Darker border on hover */
+}
+
+/* Line Edits */
+QLineEdit {
+    background-color: #333; /* Dark background for line edits */
+    color: #fff; /* Light text in line edits */
+    border: 1px solid #555; /* Slightly lighter border */
+    padding: 8px;
+    border-radius: 5px;
+}
+
+/* Labels */
+QLabel {
+    color: #aaa; /* Lighter text */
+}
+
+/* Add more styles as needed for other widgets in your application */

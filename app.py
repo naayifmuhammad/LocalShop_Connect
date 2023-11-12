@@ -2,13 +2,9 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import QObject
 from UI.LoginPage_ui import Ui_Login as Login
+from UI.Dashboard_ui import Ui_Dashboard as Dashboard
 from configurations.Config import Config
 from modules import main, auth
-
-
-
-
-########################    SET SIGNALS    ########################
 
 
 class LoginWindow(QMainWindow):
@@ -25,10 +21,10 @@ class LoginWindow(QMainWindow):
     def login(self):
         success = auth.authenticate(self.ui.le_loginPage_username.text(), self.ui.le_loginPage_password.text())
         if success:
+            dashboardWindow.show()
+            loginWindow.close()
             self.ui.label_LoginPage_register.setText("Success")
-            self.hide()
-            dashBoardWindow.show()
-            self.close()
+
 
         else:
             self.ui.label_LoginPage_register.setText("Failed")
@@ -36,11 +32,10 @@ class LoginWindow(QMainWindow):
 
 
 
-class Dashboard(QMainWindow):
-
+class DashboardWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = Login()
+        self.ui = Dashboard()
         self.ui.setupUi(self)
         main.setTheme(self, Config.theme)
 
@@ -48,6 +43,6 @@ class Dashboard(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     loginWindow = LoginWindow()
-    dashBoardWindow = Dashboard()
     loginWindow.show()
+    dashboardWindow = DashboardWindow()
     sys.exit(app.exec())
