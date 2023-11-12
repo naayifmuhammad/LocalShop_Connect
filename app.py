@@ -18,7 +18,7 @@ class LoginWindow(QMainWindow):
         self.ui = Login()
         self.ui.setupUi(self)
         main.setTheme(self, Config.theme)
-        #######################################
+        ######################################
         #Setup buttons and stuff for Login Page
         self.ui.pb_LoginBtn_login.clicked.connect(self.login)
 
