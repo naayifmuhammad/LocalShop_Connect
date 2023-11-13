@@ -27,4 +27,3 @@ QLabel {
     color: #555; /* Slightly darker text */
 }
 
-/* Add more styles as needed for other widgets in your application */
