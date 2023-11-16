@@ -1,12 +1,9 @@
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
-from PySide6.QtCore import QObject
-from UI.LoginPage_ui import Ui_Login as Login
-from UI.Dashboard_ui import Ui_Dashboard as Dashboard
-from UI.AddNewStaff_ui import Ui_AddNewStaffDialog as AddStaffWindow
-from UI.AddItem_ui import Ui_AddNewStaffDialog as AddNewItemWindow
+from UI.import_UI import *
 from configurations.Config import Config
-from modules import main, auth
+from modules import main
+from models.models import *
 
 
 class LoginWindow(QMainWindow):
@@ -19,21 +16,13 @@ class LoginWindow(QMainWindow):
         self.ui.le_loginPage_username.setText("admin")
         self.ui.le_loginPage_password.setText("admin")
         ######################################
-        #Setup buttons and stuff for Login Page
+        # Setup buttons and stuff for Login Page
         self.ui.pb_LoginBtn_login.clicked.connect(self.login)
 
     def login(self):
-        success = auth.authenticate(self.ui.le_loginPage_username.text(), self.ui.le_loginPage_password.text())
-        if success:
+        if User.login(self.ui.le_loginPage_username,self.ui.le_loginPage_password):
             dashboardWindow.show()
             loginWindow.close()
-            self.ui.label_LoginPage_register.setText("Success")
-
-
-        else:
-            self.ui.label_LoginPage_register.setText("Failed")
-
-
 
 
 class DashboardWindow(QMainWindow):
@@ -44,9 +33,10 @@ class DashboardWindow(QMainWindow):
         main.setTheme(self, Config.theme)
         ######################################
         # Setup buttons and stuff for Login Page
-        #self.ui.actionAdd_Staff.connect(self.showAddStaff)
+        # self.ui.actionAdd_Staff.connect(self.showAddStaff)
 
-    #def showAddStaff(self):
+    # def showAddStaff(self):
+
 
 class AddNewStaffWindow(QDialog):
     def __init__(self):
@@ -56,7 +46,8 @@ class AddNewStaffWindow(QDialog):
         main.setTheme(self, Config.theme)
         ######################################
         # Setup buttons and stuff for add staff Page
-        #self.ui.clicked.connect(self.login)
+        # self.ui.clicked.connect(self.login)
+
 
 class AddItemDialog(QDialog):
     def __init__(self):
@@ -66,9 +57,7 @@ class AddItemDialog(QDialog):
         main.setTheme(self, Config.theme)
         ######################################
         # Setup buttons and stuff for add staff Page
-        #self.ui.clicked.connect(self.login)
-
-
+        # self.ui.clicked.connect(self.login)
 
 
 if __name__ == "__main__":
