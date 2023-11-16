@@ -26,12 +26,13 @@ class User:
             return False
         return True
 
-    def login(self, userinfo):
+    @staticmethod
+    def login(loginInfo):
         try:
-            cur.execute("""select id from user_table where email=? and password=?""", userinfo)
+            cur.execute("""select id from user_table where email=? and password=?""", loginInfo)
             rows = cur.fetchall()
             if len(rows) < 1:
-                cur.execute("""select id from user_table where username=? and password=?""", userinfo)
+                cur.execute("""select id from user_table where username=? and password=?""", loginInfo)
                 rows = cur.fetchall()
                 if len(rows) >= 1:
                     return True

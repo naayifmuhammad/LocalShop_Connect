@@ -27,3 +27,7 @@ QLabel {
     color: #555; /* Slightly darker text */
 }
 
+label_IncorrectPasswordLoginPage{
+
+}
+

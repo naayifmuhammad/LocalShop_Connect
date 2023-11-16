@@ -1,36 +1,49 @@
 import sys
+from PySide6.QtGui import QMouseEvent
 from PySide6.QtWidgets import QApplication, QMainWindow, QDialog
-from UI.import_UI import *
 from configurations.Config import Config
-from modules import main
-from models.models import *
+from models.models import User
+from UI.UI_Manager import UI_Manager
+
+#config SingleTon
+cnf = Config.getInstance()
 
 
 class LoginWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.ui = Login()
+        self.ui = UI_Manager.LoginUI()
         self.ui.setupUi(self)
-        main.setTheme(self, Config.theme)
-        self.ui.le_loginPage_username.setText("admin")
-        self.ui.le_loginPage_password.setText("admin")
-        ######################################
-        # Setup buttons and stuff for Login Page
+        cnf.setTheme(self, cnf.getTheme())
+        # self.ui.le_loginPage_username.setText("admin")
+        # self.ui.le_loginPage_password.setText("admin")
         self.ui.pb_LoginBtn_login.clicked.connect(self.login)
+        self.ui.label_LoginPage_register.mousePressEvent = (self.goToRegister)
+
+
+    def goToRegister(self,arg):
+        #button even here
+        pass
+
 
     def login(self):
-        if User.login(self.ui.le_loginPage_username,self.ui.le_loginPage_password):
+        loginInfo = (self.ui.le_loginPage_username.text(),self.ui.le_loginPage_password.text())
+        if User.login(loginInfo):
             dashboardWindow.show()
             loginWindow.close()
+        else:
+            self.ui.label_IncorrectPasswordLoginPage.setText("Incorrect credentials. Try Again")
+            self.ui.le_loginPage_password.clear()
+            self.ui.le_loginPage_username.clear()
 
 
 class DashboardWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = Dashboard()
+        self.ui = UI_Manager.DashboardUI()
         self.ui.setupUi(self)
-        main.setTheme(self, Config.theme)
+        cnf.setTheme(self, cnf.getTheme())
         ######################################
         # Setup buttons and stuff for Login Page
         # self.ui.actionAdd_Staff.connect(self.showAddStaff)
@@ -41,9 +54,9 @@ class DashboardWindow(QMainWindow):
 class AddNewStaffWindow(QDialog):
     def __init__(self):
         super().__init__()
-        self.ui = AddStaffWindow()
+        self.ui = UI_Manager.AddStaffUI()
         self.ui.setupUi(self)
-        main.setTheme(self, Config.theme)
+        cnf.setTheme(self, cnf.getTheme())
         ######################################
         # Setup buttons and stuff for add staff Page
         # self.ui.clicked.connect(self.login)
@@ -52,9 +65,9 @@ class AddNewStaffWindow(QDialog):
 class AddItemDialog(QDialog):
     def __init__(self):
         super().__init__()
-        self.ui = AddNewItemWindow()
+        self.ui = UI_Manager.AddItemUI()
         self.ui.setupUi(self)
-        main.setTheme(self, Config.theme)
+        cnf.setTheme(self, cnf.getTheme())
         ######################################
         # Setup buttons and stuff for add staff Page
         # self.ui.clicked.connect(self.login)

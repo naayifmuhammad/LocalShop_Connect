@@ -57,6 +57,8 @@ class Ui_Login(object):
 
         self.le_loginPage_password = QLineEdit(self.centralwidget)
         self.le_loginPage_password.setObjectName(u"le_loginPage_password")
+        self.le_loginPage_password.setInputMethodHints(Qt.ImhHiddenText|Qt.ImhNoAutoUppercase|Qt.ImhNoPredictiveText|Qt.ImhSensitiveData)
+        self.le_loginPage_password.setEchoMode(QLineEdit.Password)
 
         self.formLayout.setWidget(2, QFormLayout.SpanningRole, self.le_loginPage_password)
 
@@ -70,6 +72,16 @@ class Ui_Login(object):
         self.label_LoginPage_register.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.label_LoginPage_register)
+
+        self.label_IncorrectPasswordLoginPage = QLabel(self.centralwidget)
+        self.label_IncorrectPasswordLoginPage.setObjectName(u"label_IncorrectPasswordLoginPage")
+        font1 = QFont()
+        font1.setWeight(QFont.Medium)
+        self.label_IncorrectPasswordLoginPage.setFont(font1)
+        self.label_IncorrectPasswordLoginPage.setStyleSheet(u"color:red")
+        self.label_IncorrectPasswordLoginPage.setAlignment(Qt.AlignCenter)
+
+        self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.label_IncorrectPasswordLoginPage)
 
 
         self.gridLayout.addLayout(self.formLayout, 0, 2, 1, 1)
@@ -88,5 +100,6 @@ class Ui_Login(object):
         self.le_loginPage_password.setPlaceholderText(QCoreApplication.translate("Login", u"Enter password", None))
         self.pb_LoginBtn_login.setText(QCoreApplication.translate("Login", u"Login", None))
         self.label_LoginPage_register.setText(QCoreApplication.translate("Login", u"Don't have an account? Register", None))
+        self.label_IncorrectPasswordLoginPage.setText("")
     # retranslateUi
 
