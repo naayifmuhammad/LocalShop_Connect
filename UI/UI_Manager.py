@@ -1,10 +1,9 @@
-from UI.LoginPage_ui import Ui_Login as Login
-from UI.Dashboard_ui import Ui_Dashboard as Dashboard
-from UI.AddNewStaff_ui import Ui_AddNewStaffDialog as AddStaffWindow
-from UI.AddItem_ui import Ui_AddNewStaffDialog as AddNewItemWindow
-from UI.Register_ui import Ui_RegisterWindow as RegisterWindow
+from UI.generatedUIFiles.LoginPage_ui import Ui_Login as Login
+from UI.generatedUIFiles.Dashboard_ui import Ui_Dashboard as Dashboard
+from UI.generatedUIFiles.AddNewStaff_ui import Ui_AddNewStaffDialog as AddStaffWindow
+from UI.generatedUIFiles.AddItem_ui import Ui_AddNewStaffDialog as AddNewItemWindow
+from UI.generatedUIFiles.Register_ui import Ui_RegisterWindow as RegisterWindow
 
-from enum import Enum
 
 class UI_Manager:
 

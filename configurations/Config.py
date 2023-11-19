@@ -24,3 +24,4 @@ class Config:
     def setTheme(window, file):
         styleSheet = open(file, 'r').read()
         window.setStyleSheet(styleSheet)
+

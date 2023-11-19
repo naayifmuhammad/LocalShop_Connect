@@ -32,14 +32,7 @@
      <widget class="QFrame" name="MainFrame">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="Line" name="line">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_login_heading">
+        <widget class="QLabel" name="label_Register_heading">
          <property name="font">
           <font>
            <family>Reem Kufi</family>
@@ -66,26 +59,19 @@
           <number>1</number>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="le_phone_number">
+          <item row="4" column="0" colspan="2">
+           <widget class="QLineEdit" name="le_password">
             <property name="inputMethodHints">
-             <set>Qt::ImhDigitsOnly|Qt::ImhPreferNumbers</set>
+             <set>Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
             </property>
-            <property name="maxLength">
-             <number>10</number>
-            </property>
-            <property name="placeholderText">
-             <string>Phone Number</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0" colspan="2">
-           <widget class="QLineEdit" name="le_confirm_pssword">
             <property name="text">
              <string/>
             </property>
+            <property name="echoMode">
+             <enum>QLineEdit::PasswordEchoOnEdit</enum>
+            </property>
             <property name="placeholderText">
-             <string>Confirm Password</string>
+             <string>Enter secure password</string>
             </property>
            </widget>
           </item>
@@ -119,44 +105,66 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0" colspan="2">
-           <widget class="QLineEdit" name="le_password">
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="le_phone_number">
             <property name="inputMethodHints">
-             <set>Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+             <set>Qt::ImhDigitsOnly|Qt::ImhPreferNumbers</set>
             </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="echoMode">
-             <enum>QLineEdit::PasswordEchoOnEdit</enum>
+            <property name="maxLength">
+             <number>10</number>
             </property>
             <property name="placeholderText">
-             <string>Enter secure password</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QPushButton" name="pb_LoginBtn_login">
-            <property name="text">
-             <string>Already have an account? Login</string>
+             <string>Phone Number</string>
             </property>
            </widget>
           </item>
           <item row="6" column="0">
-           <widget class="QPushButton" name="pb_LoginBtn_login_2">
+           <widget class="QPushButton" name="pb_submit_btn">
             <property name="text">
              <string>Create account</string>
             </property>
            </widget>
           </item>
+          <item row="6" column="1">
+           <widget class="QPushButton" name="pb_gotoLogin">
+            <property name="text">
+             <string>Already have an account? Login</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="2">
+           <widget class="QLineEdit" name="le_confirm_pssword">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
+            <property name="placeholderText">
+             <string>Confirm Password</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0" colspan="2">
+           <widget class="QLabel" name="label_error_message">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:red</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
          </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="Line" name="line_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
         </widget>
        </item>
       </layout>
@@ -178,6 +186,16 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>le_username</tabstop>
+  <tabstop>le_shopname</tabstop>
+  <tabstop>le_email</tabstop>
+  <tabstop>le_phone_number</tabstop>
+  <tabstop>le_password</tabstop>
+  <tabstop>le_confirm_pssword</tabstop>
+  <tabstop>pb_submit_btn</tabstop>
+  <tabstop>pb_gotoLogin</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
