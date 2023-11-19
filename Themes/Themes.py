@@ -4,6 +4,7 @@ class Theme:
     Login = UIPath + "Login.qss"
     Register = UIPath + "Register.qss"
     Dashboard = UIPath + "Dashboard.qss"
+    customTitle = UIPath + "titleBar.qss"
     def __init__(self):
         if Theme.__instance is not None:
             raise Exception("Theme instance exists already!")

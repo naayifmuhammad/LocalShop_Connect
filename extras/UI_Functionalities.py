@@ -1,15 +1,25 @@
 from PySide6 import QtCore
 from PySide6.QtCore import QPoint
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QMainWindow, QSizePolicy, QSpacerItem
+from configurations.Config import Config
+from Themes.Themes import Theme
+
+
+cnf = Config.getInstance()
+
 
 class CustomTitleBar(QFrame):
+
+    closeBtn = None
+    minimizeBtn = None
+
     def __init__(self, parent=None):
         super().__init__(parent)
+        cnf.setTheme(self, Theme.customTitle)
         self.setObjectName("customTitleBar")
         self.setMaximumHeight(50)
-
         layout = QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(0)
@@ -18,12 +28,22 @@ class CustomTitleBar(QFrame):
         spacer_left = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
         layout.addItem(spacer_left)
 
+        #set up the font
+        btnFont = QFont()
+        btnFont.setFamily("Segoe UI Semibold")
+        btnFont.setBold(1)
+        btnFont.setPointSize(15)
+
+
         # Minimize Button
         self.minimizeBtn = QLabel(self)
         self.minimizeBtn.setObjectName("minimizeBtn")
         self.minimizeBtn.setMinimumSize(20, 0)
+        self.minimizeBtn.setFont(btnFont)
         self.minimizeBtn.setAlignment(Qt.AlignRight | Qt.AlignTop | Qt.AlignTrailing)
         self.minimizeBtn.setText("-")
+
+
 
         layout.addWidget(self.minimizeBtn)
 
@@ -31,8 +51,11 @@ class CustomTitleBar(QFrame):
         self.closeBtn = QLabel(self)
         self.closeBtn.setObjectName("closeBtn")
         self.closeBtn.setMinimumSize(20, 0)
+        self.closeBtn.setFont(btnFont)
         self.closeBtn.setAlignment(Qt.AlignRight | Qt.AlignTop | Qt.AlignTrailing)
         self.closeBtn.setText("x")
+
+
 
         layout.addWidget(self.closeBtn)
 
@@ -60,15 +83,18 @@ class FrameLessWindow(QMainWindow):
     def minimizeWindow(self, arg):
         self.showMinimized()
 
-    def setupTitleBar(self):
-        # Use the CustomTitleBar class you defined
-        self.customTitleBar = CustomTitleBar(self)
-        self.customTitleBar.setObjectName("customTitleBar")
-        self.customTitleBar.setMaximumSize(16777215, 50)
+    def setupTitleBar(self,window):
+
+        self.customTitleBar = CustomTitleBar(window)
 
         # Add the custom title bar to the layout
-        self.horizontalLayout = QHBoxLayout(self.customTitleBar)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(self.horizontalSpacer_3)
-        self.horizontalLayout.addWidget(self.customTitleBar)
+        window.ui.customTitleSlot.addWidget(self.customTitleBar)
+
+        # Add the existing content to the layout
+        window.ui.customTitleSlot.addLayout(window.ui.gridLayout)
+
+        # Set the layout for the main window
+        window.setLayout(window.ui.customTitleSlot)
+        self.customTitleBar.closeBtn.mousePressEvent = self.closeWindow
+        self.customTitleBar.minimizeBtn.mousePressEvent = self.minimizeWindow
+

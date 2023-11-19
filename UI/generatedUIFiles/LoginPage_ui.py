@@ -104,10 +104,10 @@ class Ui_Login(object):
 
         self.gridLayout.addItem(self.horizontalSpacer, 1, 0, 1, 1)
 
-        self.customSlot = QVBoxLayout()
-        self.customSlot.setObjectName(u"customSlot")
+        self.customTitleSlot = QVBoxLayout()
+        self.customTitleSlot.setObjectName(u"customTitleSlot")
 
-        self.gridLayout.addLayout(self.customSlot, 0, 0, 1, 4)
+        self.gridLayout.addLayout(self.customTitleSlot, 0, 0, 1, 4)
 
         Login.setCentralWidget(self.loginCentralWidget)
 

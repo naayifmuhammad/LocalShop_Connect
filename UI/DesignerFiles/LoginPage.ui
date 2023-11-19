@@ -173,7 +173,7 @@
      </spacer>
     </item>
     <item row="0" column="0" colspan="4">
-     <layout class="QVBoxLayout" name="customSlot"/>
+     <layout class="QVBoxLayout" name="customTitleSlot"/>
     </item>
    </layout>
   </widget>

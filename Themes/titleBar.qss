@@ -1,0 +1,17 @@
+QLabel#closeBtn, QLabel#minimizeBtn {
+    color: white; /* White text */
+    padding: 5px; /* Adjust the padding as needed */
+    text-align:center;
+    margin-top:2px;
+    margin-bottom:2px;
+}
+
+QLabel#closeBtn:hover, QLabel#minimizeBtn:hover {
+    color: white; /* White text */
+    padding: 5px; /* Adjust the padding as needed */
+    margin:2px;
+    text-align:center;
+    margin-top:2px;
+    margin-bottom:2px;
+    background-color: rgba(138, 43, 226, 0.7); /* Transparent violet background */
+}

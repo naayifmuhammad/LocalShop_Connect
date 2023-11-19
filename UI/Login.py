@@ -19,25 +19,15 @@ class LoginWindow(FrameLessWindow):
         self.ui.setupUi(self)
         self.setWindowTitle("Login")
         self.makeframeLess(True)
-        # Add custom title bar
-        self.customTitleBar = CustomTitleBar(self)
-
-        # Create a vertical layout for the entire window
-        #main_layout = QVBoxLayout(self)
-
-        # Add the custom title bar to the layout
-        self.ui.customSlot.addWidget(self.customTitleBar)
-
-
-        # Add the existing content to the layout
-        self.ui.customSlot.addLayout(self.ui.gridLayout)
-
-        # Set the layout for the main window
-        self.setLayout(self.ui.customSlot)
+        self.setupTitleBar(self)
 
         cnf.setTheme(self, Theme.Login)
         self.ui.le_loginPage_username.setText("admin")
         self.ui.le_loginPage_password.setText("admin")
+
+
+
+
         self.ui.pb_LoginBtn_login.clicked.connect(self.login)
         self.ui.label_LoginPage_register.mousePressEvent = self.goToRegister
         self.show()
