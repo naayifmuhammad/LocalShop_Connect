@@ -1,20 +1,25 @@
-from PySide6.QtWidgets import QMainWindow
 from models.models import User
 from UI.UI_Manager import UI_Manager
 from configurations.Config import Config
+from extras.UI_Functionalities import FrameLessWindow
+from Themes.Themes import Theme
+from UI.PopUp import PopUpWindow
 
 cnf = Config.getInstance()
 
-class RegisterWindow(QMainWindow):
+class RegisterWindow(FrameLessWindow):
 
 
     loginWindow = None
+    popUp = None
 
     def __init__(self):
         super().__init__()
         self.ui = UI_Manager.RegisterUI()
         self.ui.setupUi(self)
-        cnf.setTheme(self, cnf.getTheme())
+        self.makeframeLess(True)
+        self.setupTitleBar(self)
+        cnf.setTheme(self,Theme.Register )
 
         #connect UI elements with functions
         self.ui.pb_gotoLogin.clicked.connect(self.gotoLogin)
@@ -32,15 +37,31 @@ class RegisterWindow(QMainWindow):
         if User.isNumberValid(self.ui.le_phone_number.text()):
             self.showErrorMessage("Enter a valid phone number")
 
+        # once Popup disappears do this
+
+    def afterPopUp(self):
+        self.popUp.closed.disconnect()
+        self.loginWindow.show()
+
+
     def register(self):
+        if True:
+            self.popUp = PopUpWindow("Registration successfully completed")
+            self.popUp.closed.connect(self.afterPopUp)
+            self.close()
+            return
+
         userinfo = (self.ui.le_username.text(),self.ui.le_email.text(),self.ui.le_phone_number.text(),self.ui.le_shopname.text(),self.ui.le_password.text())
         if not self.validInput(userinfo):
             return False
         if User.register(userinfo):
-            self.loginWindow.show()
+            self.popUp = PopUpWindow("Registration successfully completed")
+            self.popUp.closed.connect(self.afterPopUp)
             self.close()
         else:
             self.showErrorMessage("Please Recheck entered information")
+
+
 
     def validInput(self,userinfo):
         if self.isEmpty(userinfo):

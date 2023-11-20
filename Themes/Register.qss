@@ -16,6 +16,8 @@ QPushButton:hover {
     background-color: #373537; /* Darker blue on hover */
 }
 
+
+
 QLineEdit {
     background-color: #fff; /* White background for line edits */
     color: #333; /* Dark text in line edits */
@@ -31,7 +33,7 @@ label_IncorrectPasswordLoginPage {
     /* Add styles for incorrect password label if needed */
 }
 
-QWidget#loginCentralWidget {
+QWidget#registerCentralWidget {
     background-image: url("UI/Assets/register_login/background.png");
     background-repeat: no-repeat;
     background-position: center;

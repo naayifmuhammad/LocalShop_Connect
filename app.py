@@ -17,6 +17,7 @@ if __name__ == "__main__":
 
     #set components
     loginWindow.setComponents(dashboardWindow,registerWindow)
+    loginWindow.show()
     registerWindow.setComponents(loginWindow)
     dashboardWindow.setComponents(addItemWindow)
 

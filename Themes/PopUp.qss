@@ -1,0 +1,16 @@
+QLabel {
+    color: white; /* White text */
+}
+
+label_IncorrectPasswordLoginPage {
+    /* Add styles for incorrect password label if needed */
+}
+
+QWidget#PopUpCentralWidget {
+    background-image: url("UI/Assets/register_login/background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+

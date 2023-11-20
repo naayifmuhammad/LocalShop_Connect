@@ -3,7 +3,7 @@ from UI.generatedUIFiles.Dashboard_ui import Ui_Dashboard as Dashboard
 from UI.generatedUIFiles.AddNewStaff_ui import Ui_AddNewStaffDialog as AddStaffWindow
 from UI.generatedUIFiles.AddItem_ui import Ui_AddNewStaffDialog as AddNewItemWindow
 from UI.generatedUIFiles.Register_ui import Ui_RegisterWindow as RegisterWindow
-
+from UI.generatedUIFiles.PopUp_ui import Ui_PopUp
 
 class UI_Manager:
 
@@ -13,6 +13,8 @@ class UI_Manager:
     AddStaffUI = AddStaffWindow
     AddItemUI = AddNewItemWindow
     RegisterUI = RegisterWindow
+    PopUpUI = Ui_PopUp
+
 
     def __init__(self):
         if UI_Manager.__instance is not None:

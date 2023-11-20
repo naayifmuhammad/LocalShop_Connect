@@ -1,10 +1,8 @@
-from PySide6.QtWidgets import QVBoxLayout
-
 from models.models import User
 from UI.UI_Manager import UI_Manager
 from configurations.Config import Config
 from Themes.Themes import Theme
-from extras.UI_Functionalities import FrameLessWindow, CustomTitleBar
+from extras.UI_Functionalities import FrameLessWindow
 
 cnf = Config.getInstance()
 
@@ -30,7 +28,7 @@ class LoginWindow(FrameLessWindow):
 
         self.ui.pb_LoginBtn_login.clicked.connect(self.login)
         self.ui.label_LoginPage_register.mousePressEvent = self.goToRegister
-        self.show()
+        print("was just here")
 
     def goToRegister(self,arg):
         self.registerWindow.show()
