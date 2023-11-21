@@ -45,12 +45,6 @@ class RegisterWindow(FrameLessWindow):
 
 
     def register(self):
-        if True:
-            self.popUp = PopUpWindow("Registration successfully completed")
-            self.popUp.closed.connect(self.afterPopUp)
-            self.close()
-            return
-
         userinfo = (self.ui.le_username.text(),self.ui.le_email.text(),self.ui.le_phone_number.text(),self.ui.le_shopname.text(),self.ui.le_password.text())
         if not self.validInput(userinfo):
             return False

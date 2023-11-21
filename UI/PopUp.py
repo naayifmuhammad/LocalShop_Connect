@@ -18,11 +18,14 @@ class PopUpWindow(FrameLessWindow):
         self.ui.label_msg.setText(msg)
         cnf.setTheme(self, Theme.PopUp)
         self.timer = QTimer()
-        self.timer.start(3000)
+        self.timer.start(5000)
         self.timer.timeout.connect(self.emitAndClose)
         self.show()
 
     def emitAndClose(self):
+        self.closed.emit()
+        self.close()
+    def closeWindow(self, arg):
         self.closed.emit()
         self.close()
 

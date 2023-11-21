@@ -28,7 +28,6 @@ class LoginWindow(FrameLessWindow):
 
         self.ui.pb_LoginBtn_login.clicked.connect(self.login)
         self.ui.label_LoginPage_register.mousePressEvent = self.goToRegister
-        print("was just here")
 
     def goToRegister(self,arg):
         self.registerWindow.show()
