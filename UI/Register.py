@@ -49,7 +49,7 @@ class RegisterWindow(FrameLessWindow):
         if not self.validInput(userinfo):
             return False
         if User.register(userinfo):
-            self.popUp = PopUpWindow("Registration successfully completed")
+            self.popUp = PopUpWindow("Registration successfully completed",3500)
             self.popUp.closed.connect(self.afterPopUp)
             self.close()
         else:

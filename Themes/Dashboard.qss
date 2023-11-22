@@ -1,0 +1,73 @@
+/* Dashboard Styles */
+
+/* Body */
+QWidget#dashboardCentralWidget {
+    background-color: #F5F5F5; /* Light gray background */
+}
+
+/* Table Headers */
+QHeaderView::section {
+    background-color: #3498DB; /* Blue */
+    color: white;
+    padding: 5px;
+    border: none; /* Remove header borders */
+}
+
+/* Table Rows */
+QTableWidget {
+    background-color: white;
+    selection-background-color: #3498DB; /* Blue */
+    border: 1px solid #E0E0E0; /* Light gray border */
+    border-radius: 4px;
+}
+
+/* Even Row Background */
+QTableWidget:item {
+    background-color: #F2F2F2; /* Light gray for even rows */
+}
+
+/* Odd Row Background */
+QTableWidget:item:alternate {
+    background-color: white; /* White for odd rows */
+}
+
+/* Cell Borders */
+QTableWidget:item {
+    border: none; /* Remove cell borders */
+}
+
+/* Buttons */
+QPushButton {
+    background-color: #3498DB; /* Blue */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+}
+
+QPushButton:hover {
+    background-color: #2980B9; /* Darker blue on hover */
+}
+
+/* Frame */
+QFrame {
+    background-color: white;
+    border:None
+    border-radius: 4px;
+}
+
+/* Table View */
+QTableView {
+    border:none
+    /* border: 1px solid #E0E0E0;  Light gray border */
+    border-radius: 4px;
+    background:white;
+
+}
+
+/* Spacer */
+QSpacerItem {
+    padding: 10px;
+}
+
+/* Add more styles as needed */

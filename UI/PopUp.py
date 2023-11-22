@@ -9,7 +9,7 @@ cnf = Config.getInstance()
 
 class PopUpWindow(FrameLessWindow):
     closed = Signal()
-    def __init__(self,msg):
+    def __init__(self,msg,delay=None):
         super().__init__()
         self.ui = UI_Manager.PopUpUI()
         self.ui.setupUi(self)
@@ -17,9 +17,10 @@ class PopUpWindow(FrameLessWindow):
         self.setupTitleBar(self)
         self.ui.label_msg.setText(msg)
         cnf.setTheme(self, Theme.PopUp)
-        self.timer = QTimer()
-        self.timer.start(5000)
-        self.timer.timeout.connect(self.emitAndClose)
+        if delay:
+            self.timer = QTimer()
+            self.timer.start(delay)
+            self.timer.timeout.connect(self.emitAndClose)
         self.show()
 
     def emitAndClose(self):
