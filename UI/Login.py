@@ -1,3 +1,5 @@
+from PySide6.QtCore import Signal
+
 from models.models import User
 from UI.UI_Manager import UI_Manager
 from configurations.Config import Config
@@ -10,6 +12,7 @@ class LoginWindow(FrameLessWindow):
 
     dashboardWindow = None
     registerWindow = None
+    loggedIn = Signal()
 
     def __init__(self):
         super().__init__()
@@ -46,6 +49,7 @@ class LoginWindow(FrameLessWindow):
         if User.login(loginInfo):
             self.dashboardWindow.show()
             cnf.loggedIn = True
+            self.loggedIn.emit()
             self.close()
         else:
             self.ui.label_IncorrectPasswordLoginPage.setText("Incorrect credentials. Try Again")

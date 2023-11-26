@@ -1,5 +1,5 @@
 QLabel#closeBtn, QLabel#minimizeBtn {
-    color: white; /* White text */
+    color: black; /* White text */
     padding: 5px; /* Adjust the padding as needed */
     text-align:center;
     margin-top:2px;

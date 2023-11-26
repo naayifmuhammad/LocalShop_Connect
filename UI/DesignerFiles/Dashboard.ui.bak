@@ -16,9 +16,6 @@
   <widget class="QWidget" name="dashboardCentralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QVBoxLayout" name="customTitleSlot"/>
-    </item>
-    <item>
      <layout class="QGridLayout" name="mainLayout">
       <item row="0" column="0">
        <layout class="QHBoxLayout" name="window2ColumnLayoutVertical">
@@ -32,120 +29,163 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QFrame" name="ItemDetails">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
+            <widget class="QTableWidget" name="ItemDetails">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>70</height>
+              </size>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
+              <enum>QFrame::Plain</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QLineEdit" name="itemNo">
-                <property name="placeholderText">
-                 <string>Item No</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="ProductCode">
-                <property name="placeholderText">
-                 <string>Product Code</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="HSNCode">
-                <property name="placeholderText">
-                 <string>HSN Code</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="SalePrice">
-                <property name="placeholderText">
-                 <string>Sale Price</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="Quanitity">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>Quantity</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="Discount">
-                <property name="placeholderText">
-                 <string>Discount</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="Amount">
-                <property name="placeholderText">
-                 <string>Amount</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustIgnored</enum>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+             <property name="showGrid">
+              <bool>false</bool>
+             </property>
+             <attribute name="horizontalHeaderVisible">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="horizontalHeaderMinimumSectionSize">
+              <number>32</number>
+             </attribute>
+             <attribute name="horizontalHeaderHighlightSections">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>0</number>
+             </attribute>
+             <attribute name="verticalHeaderDefaultSectionSize">
+              <number>31</number>
+             </attribute>
+             <attribute name="verticalHeaderStretchLastSection">
+              <bool>false</bool>
+             </attribute>
+             <row/>
+             <column>
+              <property name="text">
+               <string>itemNo</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Product ID</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>HSN Code</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Sale Price</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Qty</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Discount</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Amount</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="taxDetails">
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
+            <widget class="QTableWidget" name="taxDetails">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>70</height>
+              </size>
              </property>
              <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
+              <enum>QFrame::Plain</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QLineEdit" name="lineEdit_8">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>CGST</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_9">
-                <property name="placeholderText">
-                 <string>SGST</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_10">
-                <property name="placeholderText">
-                 <string>IGST</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_11">
-                <property name="placeholderText">
-                 <string>Total Tax</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_12">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="placeholderText">
-                 <string>Grand Total</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <property name="verticalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustIgnored</enum>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>false</bool>
+             </property>
+             <property name="showGrid">
+              <bool>false</bool>
+             </property>
+             <attribute name="horizontalHeaderMinimumSectionSize">
+              <number>32</number>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>0</number>
+             </attribute>
+             <attribute name="verticalHeaderDefaultSectionSize">
+              <number>31</number>
+             </attribute>
+             <attribute name="verticalHeaderStretchLastSection">
+              <bool>false</bool>
+             </attribute>
+             <row/>
+             <column>
+              <property name="text">
+               <string>CSGT</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>SGST</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>IGST</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Total tax</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Final Amount</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item>
@@ -316,17 +356,6 @@
    </property>
   </action>
  </widget>
- <tabstops>
-  <tabstop>itemNo</tabstop>
-  <tabstop>ProductCode</tabstop>
-  <tabstop>HSNCode</tabstop>
-  <tabstop>SalePrice</tabstop>
-  <tabstop>Quanitity</tabstop>
-  <tabstop>Discount</tabstop>
-  <tabstop>cancelBtn</tabstop>
-  <tabstop>addItemBtn</tabstop>
-  <tabstop>cartView</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

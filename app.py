@@ -7,6 +7,11 @@ from configurations.Config import Config
 cnf = Config.getInstance()
 
 
+
+def login():
+    dashboardWindow.startMaximised()
+    loginWindow.loggedIn.disconnect()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     #init windows
@@ -18,6 +23,7 @@ if __name__ == "__main__":
     #set components
     loginWindow.setComponents(dashboardWindow,registerWindow)
     loginWindow.show()
+    loginWindow.loggedIn.connect(login)
     registerWindow.setComponents(loginWindow)
     dashboardWindow.setComponents(addItemWindow)
 

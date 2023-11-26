@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QGridLayout,
-    QHBoxLayout, QHeaderView, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QTableView, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLayout,
+    QHBoxLayout, QHeaderView, QLineEdit, QMainWindow,
+    QPushButton, QSizePolicy, QSpacerItem, QTableView,
+    QVBoxLayout, QWidget)
 
 class Ui_Dashboard(object):
     def setupUi(self, Dashboard):
@@ -54,6 +54,11 @@ class Ui_Dashboard(object):
         self.dashboardCentralWidget.setObjectName(u"dashboardCentralWidget")
         self.verticalLayout = QVBoxLayout(self.dashboardCentralWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.customTitleSlot = QVBoxLayout()
+        self.customTitleSlot.setObjectName(u"customTitleSlot")
+
+        self.verticalLayout.addLayout(self.customTitleSlot)
+
         self.mainLayout = QGridLayout()
         self.mainLayout.setObjectName(u"mainLayout")
         self.window2ColumnLayoutVertical = QHBoxLayout()
@@ -64,73 +69,81 @@ class Ui_Dashboard(object):
         self.itemAddRow.setFrameShadow(QFrame.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.itemAddRow)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.ItemDetails = QTableWidget(self.itemAddRow)
-        if (self.ItemDetails.columnCount() < 7):
-            self.ItemDetails.setColumnCount(7)
-        __qtablewidgetitem = QTableWidgetItem()
-        self.ItemDetails.setHorizontalHeaderItem(0, __qtablewidgetitem)
-        __qtablewidgetitem1 = QTableWidgetItem()
-        self.ItemDetails.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        __qtablewidgetitem2 = QTableWidgetItem()
-        self.ItemDetails.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        self.ItemDetails.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-        __qtablewidgetitem4 = QTableWidgetItem()
-        self.ItemDetails.setHorizontalHeaderItem(4, __qtablewidgetitem4)
-        __qtablewidgetitem5 = QTableWidgetItem()
-        self.ItemDetails.setHorizontalHeaderItem(5, __qtablewidgetitem5)
-        __qtablewidgetitem6 = QTableWidgetItem()
-        self.ItemDetails.setHorizontalHeaderItem(6, __qtablewidgetitem6)
-        if (self.ItemDetails.rowCount() < 1):
-            self.ItemDetails.setRowCount(1)
+        self.ItemDetails = QFrame(self.itemAddRow)
         self.ItemDetails.setObjectName(u"ItemDetails")
-        self.ItemDetails.setMaximumSize(QSize(16777215, 70))
-        self.ItemDetails.setFrameShadow(QFrame.Plain)
-        self.ItemDetails.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.ItemDetails.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
-        self.ItemDetails.setProperty("showDropIndicator", True)
-        self.ItemDetails.setAlternatingRowColors(True)
-        self.ItemDetails.setShowGrid(False)
-        self.ItemDetails.horizontalHeader().setVisible(True)
-        self.ItemDetails.horizontalHeader().setMinimumSectionSize(32)
-        self.ItemDetails.horizontalHeader().setHighlightSections(True)
-        self.ItemDetails.horizontalHeader().setStretchLastSection(True)
-        self.ItemDetails.verticalHeader().setVisible(False)
-        self.ItemDetails.verticalHeader().setMinimumSectionSize(0)
-        self.ItemDetails.verticalHeader().setDefaultSectionSize(31)
-        self.ItemDetails.verticalHeader().setStretchLastSection(False)
+        self.ItemDetails.setFrameShape(QFrame.StyledPanel)
+        self.ItemDetails.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.ItemDetails)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.itemNo = QLineEdit(self.ItemDetails)
+        self.itemNo.setObjectName(u"itemNo")
+
+        self.horizontalLayout_2.addWidget(self.itemNo)
+
+        self.ProductCode = QLineEdit(self.ItemDetails)
+        self.ProductCode.setObjectName(u"ProductCode")
+
+        self.horizontalLayout_2.addWidget(self.ProductCode)
+
+        self.HSNCode = QLineEdit(self.ItemDetails)
+        self.HSNCode.setObjectName(u"HSNCode")
+
+        self.horizontalLayout_2.addWidget(self.HSNCode)
+
+        self.SalePrice = QLineEdit(self.ItemDetails)
+        self.SalePrice.setObjectName(u"SalePrice")
+
+        self.horizontalLayout_2.addWidget(self.SalePrice)
+
+        self.Quanitity = QLineEdit(self.ItemDetails)
+        self.Quanitity.setObjectName(u"Quanitity")
+
+        self.horizontalLayout_2.addWidget(self.Quanitity)
+
+        self.Discount = QLineEdit(self.ItemDetails)
+        self.Discount.setObjectName(u"Discount")
+
+        self.horizontalLayout_2.addWidget(self.Discount)
+
+        self.Amount = QLineEdit(self.ItemDetails)
+        self.Amount.setObjectName(u"Amount")
+
+        self.horizontalLayout_2.addWidget(self.Amount)
+
 
         self.verticalLayout_5.addWidget(self.ItemDetails)
 
-        self.taxDetails = QTableWidget(self.itemAddRow)
-        if (self.taxDetails.columnCount() < 5):
-            self.taxDetails.setColumnCount(5)
-        __qtablewidgetitem7 = QTableWidgetItem()
-        self.taxDetails.setHorizontalHeaderItem(0, __qtablewidgetitem7)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.taxDetails.setHorizontalHeaderItem(1, __qtablewidgetitem8)
-        __qtablewidgetitem9 = QTableWidgetItem()
-        self.taxDetails.setHorizontalHeaderItem(2, __qtablewidgetitem9)
-        __qtablewidgetitem10 = QTableWidgetItem()
-        self.taxDetails.setHorizontalHeaderItem(3, __qtablewidgetitem10)
-        __qtablewidgetitem11 = QTableWidgetItem()
-        self.taxDetails.setHorizontalHeaderItem(4, __qtablewidgetitem11)
-        if (self.taxDetails.rowCount() < 1):
-            self.taxDetails.setRowCount(1)
+        self.taxDetails = QFrame(self.itemAddRow)
         self.taxDetails.setObjectName(u"taxDetails")
-        self.taxDetails.setMaximumSize(QSize(16777215, 70))
-        self.taxDetails.setFrameShadow(QFrame.Plain)
-        self.taxDetails.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.taxDetails.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
-        self.taxDetails.setProperty("showDropIndicator", True)
-        self.taxDetails.setAlternatingRowColors(False)
-        self.taxDetails.setShowGrid(False)
-        self.taxDetails.horizontalHeader().setMinimumSectionSize(32)
-        self.taxDetails.horizontalHeader().setStretchLastSection(True)
-        self.taxDetails.verticalHeader().setVisible(False)
-        self.taxDetails.verticalHeader().setMinimumSectionSize(0)
-        self.taxDetails.verticalHeader().setDefaultSectionSize(31)
-        self.taxDetails.verticalHeader().setStretchLastSection(False)
+        self.taxDetails.setFrameShape(QFrame.StyledPanel)
+        self.taxDetails.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_3 = QHBoxLayout(self.taxDetails)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.lineEdit_8 = QLineEdit(self.taxDetails)
+        self.lineEdit_8.setObjectName(u"lineEdit_8")
+
+        self.horizontalLayout_3.addWidget(self.lineEdit_8)
+
+        self.lineEdit_9 = QLineEdit(self.taxDetails)
+        self.lineEdit_9.setObjectName(u"lineEdit_9")
+
+        self.horizontalLayout_3.addWidget(self.lineEdit_9)
+
+        self.lineEdit_10 = QLineEdit(self.taxDetails)
+        self.lineEdit_10.setObjectName(u"lineEdit_10")
+
+        self.horizontalLayout_3.addWidget(self.lineEdit_10)
+
+        self.lineEdit_11 = QLineEdit(self.taxDetails)
+        self.lineEdit_11.setObjectName(u"lineEdit_11")
+
+        self.horizontalLayout_3.addWidget(self.lineEdit_11)
+
+        self.lineEdit_12 = QLineEdit(self.taxDetails)
+        self.lineEdit_12.setObjectName(u"lineEdit_12")
+
+        self.horizontalLayout_3.addWidget(self.lineEdit_12)
+
 
         self.verticalLayout_5.addWidget(self.taxDetails)
 
@@ -149,10 +162,10 @@ class Ui_Dashboard(object):
 
         self.horizontalLayout.addWidget(self.addItemBtn)
 
-        self.closeBtn = QPushButton(self.confirmAddItemFrame)
-        self.closeBtn.setObjectName(u"closeBtn")
+        self.cancelBtn = QPushButton(self.confirmAddItemFrame)
+        self.cancelBtn.setObjectName(u"cancelBtn")
 
-        self.horizontalLayout.addWidget(self.closeBtn)
+        self.horizontalLayout.addWidget(self.cancelBtn)
 
 
         self.verticalLayout_5.addWidget(self.confirmAddItemFrame)
@@ -166,11 +179,14 @@ class Ui_Dashboard(object):
         self.cartView = QTableView(self.CartFrame)
         self.cartView.setObjectName(u"cartView")
         self.cartView.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.cartView.setAlternatingRowColors(True)
+        self.cartView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.cartView.setShowGrid(False)
         self.cartView.setGridStyle(Qt.NoPen)
         self.cartView.setSortingEnabled(True)
-        self.cartView.setCornerButtonEnabled(False)
+        self.cartView.setCornerButtonEnabled(True)
         self.cartView.horizontalHeader().setVisible(True)
+        self.cartView.horizontalHeader().setStretchLastSection(True)
         self.cartView.verticalHeader().setVisible(False)
 
         self.gridLayout.addWidget(self.cartView, 0, 0, 1, 1)
@@ -192,6 +208,14 @@ class Ui_Dashboard(object):
         self.verticalLayout.addLayout(self.mainLayout)
 
         Dashboard.setCentralWidget(self.dashboardCentralWidget)
+        QWidget.setTabOrder(self.itemNo, self.ProductCode)
+        QWidget.setTabOrder(self.ProductCode, self.HSNCode)
+        QWidget.setTabOrder(self.HSNCode, self.SalePrice)
+        QWidget.setTabOrder(self.SalePrice, self.Quanitity)
+        QWidget.setTabOrder(self.Quanitity, self.Discount)
+        QWidget.setTabOrder(self.Discount, self.cancelBtn)
+        QWidget.setTabOrder(self.cancelBtn, self.addItemBtn)
+        QWidget.setTabOrder(self.addItemBtn, self.cartView)
 
         self.retranslateUi(Dashboard)
 
@@ -212,31 +236,22 @@ class Ui_Dashboard(object):
         self.actionCategory_2.setText(QCoreApplication.translate("Dashboard", u"Category", None))
         self.actionAdd_Staff.setText(QCoreApplication.translate("Dashboard", u"Add Staff", None))
         self.actionRemove_Staff.setText(QCoreApplication.translate("Dashboard", u"Remove Staff", None))
-        ___qtablewidgetitem = self.ItemDetails.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("Dashboard", u"itemNo", None));
-        ___qtablewidgetitem1 = self.ItemDetails.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("Dashboard", u"Product ID", None));
-        ___qtablewidgetitem2 = self.ItemDetails.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("Dashboard", u"HSN Code", None));
-        ___qtablewidgetitem3 = self.ItemDetails.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("Dashboard", u"Sale Price", None));
-        ___qtablewidgetitem4 = self.ItemDetails.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("Dashboard", u"Qty", None));
-        ___qtablewidgetitem5 = self.ItemDetails.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("Dashboard", u"Discount", None));
-        ___qtablewidgetitem6 = self.ItemDetails.horizontalHeaderItem(6)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("Dashboard", u"Amount", None));
-        ___qtablewidgetitem7 = self.taxDetails.horizontalHeaderItem(0)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("Dashboard", u"CSGT", None));
-        ___qtablewidgetitem8 = self.taxDetails.horizontalHeaderItem(1)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("Dashboard", u"SGST", None));
-        ___qtablewidgetitem9 = self.taxDetails.horizontalHeaderItem(2)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("Dashboard", u"IGST", None));
-        ___qtablewidgetitem10 = self.taxDetails.horizontalHeaderItem(3)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("Dashboard", u"Total tax", None));
-        ___qtablewidgetitem11 = self.taxDetails.horizontalHeaderItem(4)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("Dashboard", u"Final Amount", None));
+        self.itemNo.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Item No", None))
+        self.ProductCode.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Product Code", None))
+        self.HSNCode.setPlaceholderText(QCoreApplication.translate("Dashboard", u"HSN Code", None))
+        self.SalePrice.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Sale Price", None))
+        self.Quanitity.setText("")
+        self.Quanitity.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Quantity", None))
+        self.Discount.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Discount", None))
+        self.Amount.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Amount", None))
+        self.lineEdit_8.setText("")
+        self.lineEdit_8.setPlaceholderText(QCoreApplication.translate("Dashboard", u"CGST", None))
+        self.lineEdit_9.setPlaceholderText(QCoreApplication.translate("Dashboard", u"SGST", None))
+        self.lineEdit_10.setPlaceholderText(QCoreApplication.translate("Dashboard", u"IGST", None))
+        self.lineEdit_11.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Total Tax", None))
+        self.lineEdit_12.setText("")
+        self.lineEdit_12.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Grand Total", None))
         self.addItemBtn.setText(QCoreApplication.translate("Dashboard", u"Add Item", None))
-        self.closeBtn.setText(QCoreApplication.translate("Dashboard", u"Cancel Item", None))
+        self.cancelBtn.setText(QCoreApplication.translate("Dashboard", u"Cancel Item", None))
     # retranslateUi
 

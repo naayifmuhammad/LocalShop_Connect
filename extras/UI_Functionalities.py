@@ -14,10 +14,8 @@ class CustomTitleBar(QFrame):
 
     closeBtn = None
     minimizeBtn = None
-
-    def __init__(self, parent=None):
+    def __init__(self, parent=None,isDarkTheme=False):
         super().__init__(parent)
-        cnf.setTheme(self, Theme.customTitle)
         self.setObjectName("customTitleBar")
         self.setMaximumHeight(50)
         layout = QHBoxLayout(self)
@@ -41,7 +39,7 @@ class CustomTitleBar(QFrame):
         self.minimizeBtn.setMinimumSize(20, 0)
         self.minimizeBtn.setFont(btnFont)
         self.minimizeBtn.setAlignment(Qt.AlignRight | Qt.AlignTop | Qt.AlignTrailing)
-        self.minimizeBtn.setText("-")
+        self.minimizeBtn.setText(" - ")
 
 
 
@@ -53,11 +51,14 @@ class CustomTitleBar(QFrame):
         self.closeBtn.setMinimumSize(20, 0)
         self.closeBtn.setFont(btnFont)
         self.closeBtn.setAlignment(Qt.AlignRight | Qt.AlignTop | Qt.AlignTrailing)
-        self.closeBtn.setText("x")
-
-
+        self.closeBtn.setText(" x ")
 
         layout.addWidget(self.closeBtn)
+
+        if isDarkTheme:
+            cnf.setTheme(self,Theme.customTitle_dark)
+        else:
+            cnf.setTheme(self,Theme.customTitle)
 
 
 class FrameLessWindow(QMainWindow):
@@ -83,9 +84,9 @@ class FrameLessWindow(QMainWindow):
     def minimizeWindow(self, arg):
         self.showMinimized()
 
-    def setupTitleBar(self,window):
+    def setupTitleBar(self,window,isDarkTheme=False):
 
-        self.customTitleBar = CustomTitleBar(window)
+        self.customTitleBar = CustomTitleBar(window,isDarkTheme)
 
         # Add the custom title bar to the layout
         window.ui.customTitleSlot.addWidget(self.customTitleBar)
@@ -97,4 +98,5 @@ class FrameLessWindow(QMainWindow):
         window.setLayout(window.ui.customTitleSlot)
         self.customTitleBar.closeBtn.mousePressEvent = self.closeWindow
         self.customTitleBar.minimizeBtn.mousePressEvent = self.minimizeWindow
+
 

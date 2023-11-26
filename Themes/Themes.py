@@ -5,6 +5,7 @@ class Theme:
     Register = UIPath + "Register.qss"
     Dashboard = UIPath + "Dashboard.qss"
     customTitle = UIPath + "titleBar.qss"
+    customTitle_dark = UIPath + "titleBar_dark.qss"
     PopUp = UIPath + "PopUp.qss"
     def __init__(self):
         if Theme.__instance is not None:
@@ -12,3 +13,10 @@ class Theme:
         else:
             self.loggedIn = False
             Theme.__instance = self
+    def customTitleBarTheme(darkTheme=True):
+        if darkTheme:
+            return "Themes/" + "titleBar_dark.qss"
+        else:
+            return "Themes/" + "titleBar.qss"
+
+
