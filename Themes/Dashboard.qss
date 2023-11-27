@@ -56,30 +56,26 @@ QPushButton#cancelBtn:hover, QPushButton#cancelBillBtn:hover {
     background-color: #840D0F; /* Darker blue on hover */
 }
 
+
+/* Frame */
+QFrame {
+    background-color: white;
+    border:None
+    border-radius: 4px;
+}
+
+
 /* Table View */
 QTableView {
     border:none
+    /* border: 1px solid #E0E0E0;  Light gray border */
     border-radius: 4px;
     background:white;
-}
-/* Sidebar */
-QFrame#sidebar {
-    background-color: #2C3E50; /* Dark blue-gray background color */
-    border: none;
-    border-radius: 4px;
+
 }
 
-/* Sidebar PushButtons */
-QPushButton {
-    background-color: transparent; /* No background by default */
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
+/* Spacer */
+QSpacerItem {
+    padding: 10px;
 }
-
-QPushButton:hover {
-    background-color: #34495E; /* Darker blue-gray on hover */
-}
-
 

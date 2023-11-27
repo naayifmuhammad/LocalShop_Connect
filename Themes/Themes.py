@@ -7,6 +7,7 @@ class Theme:
     customTitle = UIPath + "titleBar.qss"
     customTitle_dark = UIPath + "titleBar_dark.qss"
     PopUp = UIPath + "PopUp.qss"
+    sideNavigation = UIPath + "sideNavigation.qss"
     def __init__(self):
         if Theme.__instance is not None:
             raise Exception("Theme instance exists already!")

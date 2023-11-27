@@ -1,14 +1,12 @@
 from PySide6.QtGui import QStandardItem, QStandardItemModel
-from PySide6.QtWidgets import QLineEdit, QPushButton
+from PySide6.QtWidgets import QLineEdit, QPushButton, QMainWindow
 from UI.UI_Manager import UI_Manager
 from Themes.Themes import Theme
 from configurations.Config import Config
-from extras.UI_Functionalities import FrameLessWindow
-
 
 cnf = Config.getInstance()
 
-class DashboardWindow(FrameLessWindow):
+class DashboardWindow(QMainWindow):
     addStaffWindow = None
     InputFields = {}
     sideNavButtons = {}
@@ -19,9 +17,11 @@ class DashboardWindow(FrameLessWindow):
         self.itemInputFields = None
         self.ui = UI_Manager.DashboardUI()
         self.ui.setupUi(self)
-        self.makeframeLess(True)
-        self.setupTitleBar(self,True)
+        # self.makeframeLess(True)
+        # self.setupTitleBar(self,True)
         cnf.setTheme(self, Theme.Dashboard)
+        cnf.setTheme(self.ui.sideNavigation,Theme.sideNavigation)
+
 
 
 
@@ -39,8 +39,10 @@ class DashboardWindow(FrameLessWindow):
         self.table_view.setModel(self.model)
         self.model.setHorizontalHeaderLabels(["ItemNo", "Product ID", "HSN Code", "Sale Price", "Qty", "Discount", "Amount"])
         self.setupInputFields()
-        self.sideNavButtons = self.setupSideNavButtons(self.ui.sidebar.children())
+        self.sideNavButtons = self.setupSideNavButtons(self.ui.sideNavigation.children())
         self.sideNavButtons["hamburger"].clicked.connect(self.toggleSideNav)
+        cnf.setTheme(self.ui.sideNavigation, Theme.sideNavigation)
+
 
 
 

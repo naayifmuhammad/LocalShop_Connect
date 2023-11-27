@@ -55,23 +55,16 @@ class Ui_Dashboard(object):
         self.dashboardCentralWidget.setObjectName(u"dashboardCentralWidget")
         self.verticalLayout = QVBoxLayout(self.dashboardCentralWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.customTitleSlot = QVBoxLayout()
-        self.customTitleSlot.setObjectName(u"customTitleSlot")
-
-        self.verticalLayout.addLayout(self.customTitleSlot)
-
-        self.mainLayout = QGridLayout()
-        self.mainLayout.setObjectName(u"mainLayout")
-        self.window2ColumnLayoutVertical = QHBoxLayout()
-        self.window2ColumnLayoutVertical.setObjectName(u"window2ColumnLayoutVertical")
-        self.sidebar = QFrame(self.dashboardCentralWidget)
-        self.sidebar.setObjectName(u"sidebar")
-        self.sidebar.setMinimumSize(QSize(0, 0))
-        self.sidebar.setFrameShape(QFrame.StyledPanel)
-        self.sidebar.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_2 = QVBoxLayout(self.sidebar)
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.sideNavigation = QFrame(self.dashboardCentralWidget)
+        self.sideNavigation.setObjectName(u"sideNavigation")
+        self.sideNavigation.setMinimumSize(QSize(0, 0))
+        self.sideNavigation.setFrameShape(QFrame.StyledPanel)
+        self.sideNavigation.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_2 = QVBoxLayout(self.sideNavigation)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.hamburger = QPushButton(self.sidebar)
+        self.hamburger = QPushButton(self.sideNavigation)
         self.hamburger.setObjectName(u"hamburger")
         self.hamburger.setLayoutDirection(Qt.LeftToRight)
         self.hamburger.setStyleSheet(u"text-align:left;")
@@ -84,7 +77,7 @@ class Ui_Dashboard(object):
 
         self.verticalLayout_2.addWidget(self.hamburger)
 
-        self.billing = QPushButton(self.sidebar)
+        self.billing = QPushButton(self.sideNavigation)
         self.billing.setObjectName(u"billing")
         self.billing.setLayoutDirection(Qt.LeftToRight)
         self.billing.setStyleSheet(u"text-align:left;")
@@ -96,7 +89,7 @@ class Ui_Dashboard(object):
 
         self.verticalLayout_2.addWidget(self.billing)
 
-        self.products = QPushButton(self.sidebar)
+        self.products = QPushButton(self.sideNavigation)
         self.products.setObjectName(u"products")
         self.products.setLayoutDirection(Qt.LeftToRight)
         self.products.setStyleSheet(u"text-align:left;")
@@ -108,7 +101,7 @@ class Ui_Dashboard(object):
 
         self.verticalLayout_2.addWidget(self.products)
 
-        self.staff = QPushButton(self.sidebar)
+        self.staff = QPushButton(self.sideNavigation)
         self.staff.setObjectName(u"staff")
         self.staff.setLayoutDirection(Qt.LeftToRight)
         self.staff.setStyleSheet(u"text-align:left;")
@@ -120,7 +113,7 @@ class Ui_Dashboard(object):
 
         self.verticalLayout_2.addWidget(self.staff)
 
-        self.analytics = QPushButton(self.sidebar)
+        self.analytics = QPushButton(self.sideNavigation)
         self.analytics.setObjectName(u"analytics")
         self.analytics.setLayoutDirection(Qt.LeftToRight)
         self.analytics.setStyleSheet(u"text-align:left;")
@@ -132,7 +125,7 @@ class Ui_Dashboard(object):
 
         self.verticalLayout_2.addWidget(self.analytics)
 
-        self.history = QPushButton(self.sidebar)
+        self.history = QPushButton(self.sideNavigation)
         self.history.setObjectName(u"history")
         self.history.setLayoutDirection(Qt.LeftToRight)
         self.history.setStyleSheet(u"text-align:left;")
@@ -144,7 +137,7 @@ class Ui_Dashboard(object):
 
         self.verticalLayout_2.addWidget(self.history)
 
-        self.settings = QPushButton(self.sidebar)
+        self.settings = QPushButton(self.sideNavigation)
         self.settings.setObjectName(u"settings")
         self.settings.setLayoutDirection(Qt.LeftToRight)
         self.settings.setStyleSheet(u"text-align:left;")
@@ -161,8 +154,10 @@ class Ui_Dashboard(object):
         self.verticalLayout_2.addItem(self.verticalSpacer_2)
 
 
-        self.window2ColumnLayoutVertical.addWidget(self.sidebar)
+        self.horizontalLayout_4.addWidget(self.sideNavigation)
 
+        self.window2ColumnLayoutVertical = QHBoxLayout()
+        self.window2ColumnLayoutVertical.setObjectName(u"window2ColumnLayoutVertical")
         self.itemAddRow = QFrame(self.dashboardCentralWidget)
         self.itemAddRow.setObjectName(u"itemAddRow")
         self.itemAddRow.setFrameShape(QFrame.StyledPanel)
@@ -316,10 +311,10 @@ class Ui_Dashboard(object):
         self.window2ColumnLayoutVertical.addWidget(self.itemAddRow)
 
 
-        self.mainLayout.addLayout(self.window2ColumnLayoutVertical, 0, 0, 1, 1)
+        self.horizontalLayout_4.addLayout(self.window2ColumnLayoutVertical)
 
 
-        self.verticalLayout.addLayout(self.mainLayout)
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
 
         Dashboard.setCentralWidget(self.dashboardCentralWidget)
         QWidget.setTabOrder(self.ProductCode, self.Quantity)
