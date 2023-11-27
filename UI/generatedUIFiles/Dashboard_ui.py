@@ -20,6 +20,7 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLay
     QHBoxLayout, QHeaderView, QLineEdit, QMainWindow,
     QPushButton, QSizePolicy, QSpacerItem, QTableView,
     QVBoxLayout, QWidget)
+import icons_rc
 
 class Ui_Dashboard(object):
     def setupUi(self, Dashboard):
@@ -63,6 +64,105 @@ class Ui_Dashboard(object):
         self.mainLayout.setObjectName(u"mainLayout")
         self.window2ColumnLayoutVertical = QHBoxLayout()
         self.window2ColumnLayoutVertical.setObjectName(u"window2ColumnLayoutVertical")
+        self.sidebar = QFrame(self.dashboardCentralWidget)
+        self.sidebar.setObjectName(u"sidebar")
+        self.sidebar.setMinimumSize(QSize(0, 0))
+        self.sidebar.setFrameShape(QFrame.StyledPanel)
+        self.sidebar.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_2 = QVBoxLayout(self.sidebar)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.hamburger = QPushButton(self.sidebar)
+        self.hamburger.setObjectName(u"hamburger")
+        self.hamburger.setLayoutDirection(Qt.LeftToRight)
+        self.hamburger.setStyleSheet(u"text-align:left;")
+        icon = QIcon()
+        icon.addFile(u":/button-icons/hamburger-menu.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.hamburger.setIcon(icon)
+        self.hamburger.setIconSize(QSize(25, 25))
+        self.hamburger.setAutoDefault(False)
+        self.hamburger.setFlat(True)
+
+        self.verticalLayout_2.addWidget(self.hamburger)
+
+        self.billing = QPushButton(self.sidebar)
+        self.billing.setObjectName(u"billing")
+        self.billing.setLayoutDirection(Qt.LeftToRight)
+        self.billing.setStyleSheet(u"text-align:left;")
+        icon1 = QIcon()
+        icon1.addFile(u":/button-icons/billing.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.billing.setIcon(icon1)
+        self.billing.setIconSize(QSize(25, 25))
+        self.billing.setFlat(True)
+
+        self.verticalLayout_2.addWidget(self.billing)
+
+        self.products = QPushButton(self.sidebar)
+        self.products.setObjectName(u"products")
+        self.products.setLayoutDirection(Qt.LeftToRight)
+        self.products.setStyleSheet(u"text-align:left;")
+        icon2 = QIcon()
+        icon2.addFile(u":/button-icons/features.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.products.setIcon(icon2)
+        self.products.setIconSize(QSize(25, 25))
+        self.products.setFlat(True)
+
+        self.verticalLayout_2.addWidget(self.products)
+
+        self.staff = QPushButton(self.sidebar)
+        self.staff.setObjectName(u"staff")
+        self.staff.setLayoutDirection(Qt.LeftToRight)
+        self.staff.setStyleSheet(u"text-align:left;")
+        icon3 = QIcon()
+        icon3.addFile(u":/button-icons/users.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.staff.setIcon(icon3)
+        self.staff.setIconSize(QSize(25, 25))
+        self.staff.setFlat(True)
+
+        self.verticalLayout_2.addWidget(self.staff)
+
+        self.analytics = QPushButton(self.sidebar)
+        self.analytics.setObjectName(u"analytics")
+        self.analytics.setLayoutDirection(Qt.LeftToRight)
+        self.analytics.setStyleSheet(u"text-align:left;")
+        icon4 = QIcon()
+        icon4.addFile(u":/button-icons/analytics.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.analytics.setIcon(icon4)
+        self.analytics.setIconSize(QSize(25, 25))
+        self.analytics.setFlat(True)
+
+        self.verticalLayout_2.addWidget(self.analytics)
+
+        self.history = QPushButton(self.sidebar)
+        self.history.setObjectName(u"history")
+        self.history.setLayoutDirection(Qt.LeftToRight)
+        self.history.setStyleSheet(u"text-align:left;")
+        icon5 = QIcon()
+        icon5.addFile(u":/button-icons/file.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.history.setIcon(icon5)
+        self.history.setIconSize(QSize(25, 25))
+        self.history.setFlat(True)
+
+        self.verticalLayout_2.addWidget(self.history)
+
+        self.settings = QPushButton(self.sidebar)
+        self.settings.setObjectName(u"settings")
+        self.settings.setLayoutDirection(Qt.LeftToRight)
+        self.settings.setStyleSheet(u"text-align:left;")
+        icon6 = QIcon()
+        icon6.addFile(u":/button-icons/settings.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.settings.setIcon(icon6)
+        self.settings.setIconSize(QSize(25, 25))
+        self.settings.setFlat(True)
+
+        self.verticalLayout_2.addWidget(self.settings)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer_2)
+
+
+        self.window2ColumnLayoutVertical.addWidget(self.sidebar)
+
         self.itemAddRow = QFrame(self.dashboardCentralWidget)
         self.itemAddRow.setObjectName(u"itemAddRow")
         self.itemAddRow.setFrameShape(QFrame.StyledPanel)
@@ -95,10 +195,10 @@ class Ui_Dashboard(object):
 
         self.horizontalLayout_2.addWidget(self.SalePrice)
 
-        self.Quanitity = QLineEdit(self.ItemDetails)
-        self.Quanitity.setObjectName(u"Quanitity")
+        self.Quantity = QLineEdit(self.ItemDetails)
+        self.Quantity.setObjectName(u"Quantity")
 
-        self.horizontalLayout_2.addWidget(self.Quanitity)
+        self.horizontalLayout_2.addWidget(self.Quantity)
 
         self.Discount = QLineEdit(self.ItemDetails)
         self.Discount.setObjectName(u"Discount")
@@ -119,30 +219,30 @@ class Ui_Dashboard(object):
         self.taxDetails.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.taxDetails)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.lineEdit_8 = QLineEdit(self.taxDetails)
-        self.lineEdit_8.setObjectName(u"lineEdit_8")
+        self.cgst = QLineEdit(self.taxDetails)
+        self.cgst.setObjectName(u"cgst")
 
-        self.horizontalLayout_3.addWidget(self.lineEdit_8)
+        self.horizontalLayout_3.addWidget(self.cgst)
 
-        self.lineEdit_9 = QLineEdit(self.taxDetails)
-        self.lineEdit_9.setObjectName(u"lineEdit_9")
+        self.sgst = QLineEdit(self.taxDetails)
+        self.sgst.setObjectName(u"sgst")
 
-        self.horizontalLayout_3.addWidget(self.lineEdit_9)
+        self.horizontalLayout_3.addWidget(self.sgst)
 
-        self.lineEdit_10 = QLineEdit(self.taxDetails)
-        self.lineEdit_10.setObjectName(u"lineEdit_10")
+        self.igst = QLineEdit(self.taxDetails)
+        self.igst.setObjectName(u"igst")
 
-        self.horizontalLayout_3.addWidget(self.lineEdit_10)
+        self.horizontalLayout_3.addWidget(self.igst)
 
-        self.lineEdit_11 = QLineEdit(self.taxDetails)
-        self.lineEdit_11.setObjectName(u"lineEdit_11")
+        self.totalTax = QLineEdit(self.taxDetails)
+        self.totalTax.setObjectName(u"totalTax")
 
-        self.horizontalLayout_3.addWidget(self.lineEdit_11)
+        self.horizontalLayout_3.addWidget(self.totalTax)
 
-        self.lineEdit_12 = QLineEdit(self.taxDetails)
-        self.lineEdit_12.setObjectName(u"lineEdit_12")
+        self.grandTotal = QLineEdit(self.taxDetails)
+        self.grandTotal.setObjectName(u"grandTotal")
 
-        self.horizontalLayout_3.addWidget(self.lineEdit_12)
+        self.horizontalLayout_3.addWidget(self.grandTotal)
 
 
         self.verticalLayout_5.addWidget(self.taxDetails)
@@ -176,6 +276,20 @@ class Ui_Dashboard(object):
         self.CartFrame.setFrameShadow(QFrame.Raised)
         self.gridLayout = QGridLayout(self.CartFrame)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.confirmBillBtn = QPushButton(self.CartFrame)
+        self.confirmBillBtn.setObjectName(u"confirmBillBtn")
+
+        self.gridLayout.addWidget(self.confirmBillBtn, 1, 1, 1, 1)
+
+        self.cancelBillBtn = QPushButton(self.CartFrame)
+        self.cancelBillBtn.setObjectName(u"cancelBillBtn")
+
+        self.gridLayout.addWidget(self.cancelBillBtn, 1, 2, 1, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout.addItem(self.horizontalSpacer_2, 1, 0, 1, 1)
+
         self.cartView = QTableView(self.CartFrame)
         self.cartView.setObjectName(u"cartView")
         self.cartView.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -183,13 +297,13 @@ class Ui_Dashboard(object):
         self.cartView.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.cartView.setShowGrid(False)
         self.cartView.setGridStyle(Qt.NoPen)
-        self.cartView.setSortingEnabled(True)
+        self.cartView.setSortingEnabled(False)
         self.cartView.setCornerButtonEnabled(True)
         self.cartView.horizontalHeader().setVisible(True)
         self.cartView.horizontalHeader().setStretchLastSection(True)
         self.cartView.verticalHeader().setVisible(False)
 
-        self.gridLayout.addWidget(self.cartView, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.cartView, 0, 0, 1, 3)
 
 
         self.verticalLayout_5.addWidget(self.CartFrame)
@@ -208,16 +322,25 @@ class Ui_Dashboard(object):
         self.verticalLayout.addLayout(self.mainLayout)
 
         Dashboard.setCentralWidget(self.dashboardCentralWidget)
-        QWidget.setTabOrder(self.itemNo, self.ProductCode)
-        QWidget.setTabOrder(self.ProductCode, self.HSNCode)
-        QWidget.setTabOrder(self.HSNCode, self.SalePrice)
-        QWidget.setTabOrder(self.SalePrice, self.Quanitity)
-        QWidget.setTabOrder(self.Quanitity, self.Discount)
-        QWidget.setTabOrder(self.Discount, self.cancelBtn)
-        QWidget.setTabOrder(self.cancelBtn, self.addItemBtn)
-        QWidget.setTabOrder(self.addItemBtn, self.cartView)
+        QWidget.setTabOrder(self.ProductCode, self.Quantity)
+        QWidget.setTabOrder(self.Quantity, self.Discount)
+        QWidget.setTabOrder(self.Discount, self.addItemBtn)
+        QWidget.setTabOrder(self.addItemBtn, self.cancelBtn)
+        QWidget.setTabOrder(self.cancelBtn, self.cartView)
+        QWidget.setTabOrder(self.cartView, self.Amount)
+        QWidget.setTabOrder(self.Amount, self.cgst)
+        QWidget.setTabOrder(self.cgst, self.sgst)
+        QWidget.setTabOrder(self.sgst, self.igst)
+        QWidget.setTabOrder(self.igst, self.totalTax)
+        QWidget.setTabOrder(self.totalTax, self.grandTotal)
+        QWidget.setTabOrder(self.grandTotal, self.itemNo)
+        QWidget.setTabOrder(self.itemNo, self.SalePrice)
+        QWidget.setTabOrder(self.SalePrice, self.HSNCode)
 
         self.retranslateUi(Dashboard)
+
+        self.hamburger.setDefault(False)
+
 
         QMetaObject.connectSlotsByName(Dashboard)
     # setupUi
@@ -236,22 +359,55 @@ class Ui_Dashboard(object):
         self.actionCategory_2.setText(QCoreApplication.translate("Dashboard", u"Category", None))
         self.actionAdd_Staff.setText(QCoreApplication.translate("Dashboard", u"Add Staff", None))
         self.actionRemove_Staff.setText(QCoreApplication.translate("Dashboard", u"Remove Staff", None))
+#if QT_CONFIG(tooltip)
+        self.hamburger.setToolTip(QCoreApplication.translate("Dashboard", u"Show/Hide", None))
+#endif // QT_CONFIG(tooltip)
+        self.hamburger.setText("")
+#if QT_CONFIG(tooltip)
+        self.billing.setToolTip(QCoreApplication.translate("Dashboard", u"Billing", None))
+#endif // QT_CONFIG(tooltip)
+        self.billing.setText("")
+#if QT_CONFIG(tooltip)
+        self.products.setToolTip(QCoreApplication.translate("Dashboard", u"Products", None))
+#endif // QT_CONFIG(tooltip)
+        self.products.setText("")
+#if QT_CONFIG(tooltip)
+        self.staff.setToolTip(QCoreApplication.translate("Dashboard", u"Manage Staff", None))
+#endif // QT_CONFIG(tooltip)
+        self.staff.setText("")
+#if QT_CONFIG(shortcut)
+        self.staff.setShortcut(QCoreApplication.translate("Dashboard", u"Esc", None))
+#endif // QT_CONFIG(shortcut)
+#if QT_CONFIG(tooltip)
+        self.analytics.setToolTip(QCoreApplication.translate("Dashboard", u"Analytics", None))
+#endif // QT_CONFIG(tooltip)
+        self.analytics.setText("")
+#if QT_CONFIG(tooltip)
+        self.history.setToolTip(QCoreApplication.translate("Dashboard", u"Bill History", None))
+#endif // QT_CONFIG(tooltip)
+        self.history.setText("")
+#if QT_CONFIG(tooltip)
+        self.settings.setToolTip(QCoreApplication.translate("Dashboard", u"Settings", None))
+#endif // QT_CONFIG(tooltip)
+        self.settings.setText("")
         self.itemNo.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Item No", None))
         self.ProductCode.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Product Code", None))
         self.HSNCode.setPlaceholderText(QCoreApplication.translate("Dashboard", u"HSN Code", None))
         self.SalePrice.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Sale Price", None))
-        self.Quanitity.setText("")
-        self.Quanitity.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Quantity", None))
+        self.Quantity.setText("")
+        self.Quantity.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Quantity", None))
         self.Discount.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Discount", None))
         self.Amount.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Amount", None))
-        self.lineEdit_8.setText("")
-        self.lineEdit_8.setPlaceholderText(QCoreApplication.translate("Dashboard", u"CGST", None))
-        self.lineEdit_9.setPlaceholderText(QCoreApplication.translate("Dashboard", u"SGST", None))
-        self.lineEdit_10.setPlaceholderText(QCoreApplication.translate("Dashboard", u"IGST", None))
-        self.lineEdit_11.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Total Tax", None))
-        self.lineEdit_12.setText("")
-        self.lineEdit_12.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Grand Total", None))
+        self.cgst.setText("")
+        self.cgst.setPlaceholderText(QCoreApplication.translate("Dashboard", u"CGST", None))
+        self.sgst.setPlaceholderText(QCoreApplication.translate("Dashboard", u"SGST", None))
+        self.igst.setPlaceholderText(QCoreApplication.translate("Dashboard", u"IGST", None))
+        self.totalTax.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Total Tax", None))
+        self.grandTotal.setText("")
+        self.grandTotal.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Grand Total", None))
         self.addItemBtn.setText(QCoreApplication.translate("Dashboard", u"Add Item", None))
         self.cancelBtn.setText(QCoreApplication.translate("Dashboard", u"Cancel Item", None))
+        self.confirmBillBtn.setText(QCoreApplication.translate("Dashboard", u"Print Bill", None))
+        self.cancelBillBtn.setText(QCoreApplication.translate("Dashboard", u"Cancel Bill", None))
     # retranslateUi
 

@@ -1,5 +1,5 @@
 from PySide6.QtGui import QStandardItem, QStandardItemModel
-from PySide6.QtWidgets import QMainWindow, QLineEdit
+from PySide6.QtWidgets import QLineEdit, QPushButton
 from UI.UI_Manager import UI_Manager
 from Themes.Themes import Theme
 from configurations.Config import Config
@@ -10,7 +10,9 @@ cnf = Config.getInstance()
 
 class DashboardWindow(FrameLessWindow):
     addStaffWindow = None
-    InputFields = None
+    InputFields = {}
+    sideNavButtons = {}
+    sidenavToggled = False
     def __init__(self):
         #just UI setup part
         super().__init__()
@@ -36,9 +38,11 @@ class DashboardWindow(FrameLessWindow):
         self.model = QStandardItemModel()
         self.table_view.setModel(self.model)
         self.model.setHorizontalHeaderLabels(["ItemNo", "Product ID", "HSN Code", "Sale Price", "Qty", "Discount", "Amount"])
+        self.setupInputFields()
+        self.sideNavButtons = self.setupSideNavButtons(self.ui.sidebar.children())
+        self.sideNavButtons["hamburger"].clicked.connect(self.toggleSideNav)
 
-        # create a dictionary of input field, so it's easier to clear and fetch data from them
-        self.InputFields = self.getFields(self.ui.ItemDetails.children())
+
 
 
     #get all input fields related to item to later fetch data from it and clear it
@@ -49,6 +53,31 @@ class DashboardWindow(FrameLessWindow):
                 inputFields[field.objectName()] = field
         return inputFields
 
+    def setupSideNavButtons(self,sideNavElements):
+        sidenavButtons = {}
+        for btn in sideNavElements:
+            if isinstance(btn,QPushButton):
+                sidenavButtons[btn.objectName()] = btn
+        return sidenavButtons
+
+    def toggleSideNav(self):
+        self.sidenavToggled = not self.sidenavToggled
+
+        for button in self.sideNavButtons.values():
+            if self.sidenavToggled:
+                button.setText(button.toolTip())
+            else:
+                button.setText("")
+
+    def setupInputFields(self):
+        # create a dictionary of input field, so it's easier to clear and fetch data from them
+        self.InputFields.update(self.getFields(self.ui.ItemDetails.children()))
+        self.InputFields.update(self.getFields(self.ui.taxDetails.children()))
+        #now make sure to set the non editable fields that way:
+        nonEditableFields = ['itemNo', 'HSNCode','SalePrice','Amount', 'cgst', 'sgst', 'igst', 'totalTax', 'grandTotal']
+        for field in nonEditableFields:
+            self.InputFields[field].setDisabled(True)
+            self.InputFields[field].setText("Value")
 
     def setComponents(self,dialog):
         self.addStaffWindow = dialog

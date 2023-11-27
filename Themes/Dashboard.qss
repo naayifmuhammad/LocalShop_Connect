@@ -1,12 +1,5 @@
 /* Dashboard Styles */
 
-/* Body */
-QWidget#dashboardCentralWidget {
-    background-image: url("UI/Assets/Dashboard/dashboardBackground.png");
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 /* Table Headers */
 QHeaderView::section {
     background-color: #3498DB; /* Blue */
@@ -39,7 +32,7 @@ QTableWidget:item {
 }
 
 
-QPushButton#addItemBtn {
+QPushButton#addItemBtn, QPushButton#confirmBillBtn {
     background-color: #07971B; /* green */
     color: white;
     padding: 8px 16px;
@@ -47,11 +40,11 @@ QPushButton#addItemBtn {
     border-radius: 4px;
 }
 
-QPushButton#addItemBtn:hover {
+QPushButton#addItemBtn:hover, QPushButton#confirmBillBtn:hover {
     background-color: #065912; /* Darker blue on hover */
 }
 
-QPushButton#cancelBtn {
+QPushButton#cancelBtn, QPushButton#cancelBillBtn {
     background-color: #E11317; /* red */
     color: white;
     padding: 8px 16px;
@@ -59,48 +52,34 @@ QPushButton#cancelBtn {
     border-radius: 4px;
 }
 
-QPushButton#cancelBtn:hover {
+QPushButton#cancelBtn:hover, QPushButton#cancelBillBtn:hover {
     background-color: #840D0F; /* Darker blue on hover */
-}
-
-
-/* Frame */
-QFrame {
-    background-color: white;
-    border:None
-    border-radius: 4px;
 }
 
 /* Table View */
 QTableView {
     border:none
-    /* border: 1px solid #E0E0E0;  Light gray border */
     border-radius: 4px;
     background:white;
-
+}
+/* Sidebar */
+QFrame#sidebar {
+    background-color: #2C3E50; /* Dark blue-gray background color */
+    border: none;
+    border-radius: 4px;
 }
 
-/* Spacer */
-QSpacerItem {
-    padding: 10px;
+/* Sidebar PushButtons */
+QPushButton {
+    background-color: transparent; /* No background by default */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
 }
 
-QLabel#closeBtn, QLabel#minimizeBtn {
-    color: black; /* White text */
-    padding: 5px; /* Adjust the padding as needed */
-    text-align:center;
-    margin-top:2px;
-    margin-bottom:2px;
-}
-
-QLabel#closeBtn:hover, QLabel#minimizeBtn:hover {
-    color: white; /* White text */
-    padding: 5px; /* Adjust the padding as needed */
-    margin:2px;
-    text-align:center;
-    margin-top:2px;
-    margin-bottom:2px;
-    background-color: #FF3131; /* Transparent violet background */
+QPushButton:hover {
+    background-color: #34495E; /* Darker blue-gray on hover */
 }
 
 
