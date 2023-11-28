@@ -103,13 +103,14 @@ class User:
 
 class Product:
     def __init__(self):
+
         try:
             cur.execute("""CREATE TABLE IF NOT EXISTS "categories" (
-            	    "id"	INTEGER NOT NULL,
-            	    "name"	TEXT NOT NULL UNIQUE,
-            	    "description"	TEXT,
-            	    PRIMARY KEY("id" AUTOINCREMENT)
-                    );""")
+            "id"	INTEGER NOT NULL,
+            "name"	TEXT NOT NULL UNIQUE,
+            "description"	TEXT,
+            PRIMARY KEY("id" AUTOINCREMENT)
+            );""")
 
             cur.execute("""CREATE TABLE IF NOT EXISTS "vendors" (
         	"id"	INTEGER NOT NULL,
@@ -120,21 +121,21 @@ class Product:
             );""")
 
             cur.execute("""CREATE TABLE IF NOT EXISTS "products" (
-            "id"	INTEGER NOT NULL,
-            "productCode"	TEXT NOT NULL UNIQUE,
-            "productName"	TEXT NOT NULL UNIQUE,
-            "vendorID"	INTEGER NOT NULL,
-            "categoryID"	INTEGER NOT NULL,
-            "costPrice"	REAL NOT NULL,
-            "salePrice"	REAL NOT NULL,
-            "hsnCode"	INTEGER,
-            "taxRate"	INTEGER NOT NULL,
-            "qtyInStock"	INTEGER NOT NULL DEFAULT 0,
-            "minStockLevel"	INTEGER NOT NULL DEFAULT 0,
-            PRIMARY KEY("id" AUTOINCREMENT),
-            FOREIGN KEY("vendorID") REFERENCES "vendors"("id"),
-            FOREIGN KEY("categoryID") REFERENCES "categories"("id")
-            );""")
+        	"id"	INTEGER NOT NULL,
+        	"productCode"	TEXT NOT NULL UNIQUE,
+        	"productName"	TEXT NOT NULL UNIQUE,
+        	"vendorID"	TEXT NOT NULL,
+        	"categoryID"	TEXT NOT NULL,
+        	"costPrice"	REAL NOT NULL,
+        	"salePrice"	REAL NOT NULL,
+        	"hsnCode"	INTEGER,
+        	"taxRate"	INTEGER NOT NULL,
+        	"qtyInStock"	INTEGER NOT NULL DEFAULT 0,
+        	"minStockLevel"	INTEGER NOT NULL DEFAULT 0,
+        	FOREIGN KEY("vendorID") REFERENCES "vendors"("shopName"),
+        	FOREIGN KEY("categoryID") REFERENCES "categories"("name"),
+        	PRIMARY KEY("id" AUTOINCREMENT)
+            )""")
         except sqlite3.Error as error:
             print(error)
 
@@ -203,5 +204,66 @@ class Product:
             return False
         return True
 
+    @staticmethod
+    def fetchCategories():
+        cur.execute("""SELECT name FROM categories;""")
+        rows = cur.fetchall()
+        data = []
+        for row in rows:
+            data.append(row[0])
+        return data
+    @staticmethod
+    def fetchVendors():
+        cur.execute("""SELECT shopName FROM vendors;""")
+        rows = cur.fetchall()
+        data = []
+        for row in rows:
+            data.append(row[0])
+        return data
+
+    @staticmethod
+    def fetchProductCodes():
+        cur.execute("""SELECT productCode, productName from products;""")
+        rows = cur.fetchall()
+        data = []
+        for row in rows:
+            data.append({'productCode':row[0],'productName':row[1]})
+        return data
+
+
+    @staticmethod
+    def fetchProductDataForBill(productCode):
+        try:
+            cur.execute("""SELECT hsnCode, salePrice, taxRate FROM products WHERE productCode = ?;""",(productCode,))
+            row = cur.fetchone()
+            productDataForBill = {"hsnCode": row[0], "salePrice": row[1], "taxRate": row[2]}
+
+            return productDataForBill
+
+        except sqlite3.Error as err:
+            print(err)
+
+
+
+
+#create class to save billInformation
+class Bill:
+    def __init__(self):
+        try:
+            cur.execute("""CREATE TABLE IF NOT EXISTS "bill" (
+    	    "billNo"	INTEGER,
+    	    "datetime_column"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    	    "amount"	REAL NOT NULL DEFAULT 0,
+    	    PRIMARY KEY("billNo" AUTOINCREMENT)
+            );""")
+        except sqlite3.Error as error:
+            print(error)
+
+
+    def getBillNo(self):
+        cur.execute("""select max(billNo) from bill;""")
+        row = cur.fetchone()
+        billNo = int(row[0])+1
+        return billNo
 
 

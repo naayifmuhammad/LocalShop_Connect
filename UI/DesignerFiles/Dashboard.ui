@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>LocalShop Connect</string>
   </property>
   <widget class="QWidget" name="dashboardCentralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -293,13 +293,22 @@
              <layout class="QHBoxLayout" name="horizontalLayout_2">
               <item>
                <widget class="QLineEdit" name="itemNo">
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
                 <property name="placeholderText">
                  <string>Item No</string>
+                </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="ProductCode">
+               <widget class="QComboBox" name="ProductCode">
                 <property name="placeholderText">
                  <string>Product Code</string>
                 </property>
@@ -310,12 +319,18 @@
                 <property name="placeholderText">
                  <string>HSN Code</string>
                 </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QLineEdit" name="SalePrice">
                 <property name="placeholderText">
                  <string>Sale Price</string>
+                </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -327,6 +342,9 @@
                 <property name="placeholderText">
                  <string>Quantity</string>
                 </property>
+                <property name="editable" stdset="0">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -334,12 +352,21 @@
                 <property name="placeholderText">
                  <string>Discount</string>
                 </property>
+                <property name="editable" stdset="0">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QLineEdit" name="Amount">
                 <property name="placeholderText">
                  <string>Amount</string>
+                </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
+                </property>
+                <property name="originalValue" stdset="0">
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -363,12 +390,18 @@
                 <property name="placeholderText">
                  <string>CGST</string>
                 </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QLineEdit" name="sgst">
                 <property name="placeholderText">
                  <string>SGST</string>
+                </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -377,12 +410,18 @@
                 <property name="placeholderText">
                  <string>IGST</string>
                 </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QLineEdit" name="totalTax">
                 <property name="placeholderText">
                  <string>Total Tax</string>
+                </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -393,6 +432,9 @@
                 </property>
                 <property name="placeholderText">
                  <string>Grand Total</string>
+                </property>
+                <property name="editable" stdset="0">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -595,7 +637,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>ProductCode</tabstop>
   <tabstop>Quantity</tabstop>
   <tabstop>Discount</tabstop>
   <tabstop>addItemBtn</tabstop>

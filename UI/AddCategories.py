@@ -13,6 +13,7 @@ class AddCategoriesDialog(QMainWindow):
     InputFields = {}
     info = {}
     finished = Signal()
+    updated = Signal()
     productDB = Product()
     def __init__(self):
         super().__init__()
@@ -35,9 +36,9 @@ class AddCategoriesDialog(QMainWindow):
                    'name': self.info["name"],
                    'description': self.info["description"]
                }
-               print(f"db values = {db_ItemInfo}")
                if self.productDB.addCategory(db_ItemInfo):
                    Alert.show_alert(f"Added new category [{self.info['name']}]")
+                   self.updated.emit()
                else:
                    Alert.show_alert("Some error occurred, Try again")
        except ValueError as ve:

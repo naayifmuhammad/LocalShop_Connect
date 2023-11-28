@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="button-icons">
+    <file>file.png</file>
+    <file>add-user.png</file>
+    <file>analytics.png</file>
+    <file>billing.png</file>
+    <file>buy_products.png</file>
+    <file>delete.png</file>
+    <file>hamburger-menu.png</file>
+    <file>features.png</file>
+    <file>plus_icon.png</file>
+    <file>remove(1).png</file>
+    <file>remove.png</file>
+    <file>settings.png</file>
+    <file>staff-management.png</file>
+    <file>users.png</file>
+  </qresource>
+</RCC>

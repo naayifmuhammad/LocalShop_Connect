@@ -13,6 +13,7 @@ class AddVendorDialog(QMainWindow):
     InputFields = {}
     info = {}
     finished = Signal()
+    updated = Signal()
     productDB = Product()
     def __init__(self):
         super().__init__()
@@ -36,9 +37,9 @@ class AddVendorDialog(QMainWindow):
                    'ownerName': self.info["ownerName"],
                    'location': self.info["location"]
                }
-               print(f"db values = {db_ItemInfo}")
                if self.productDB.addVendor(db_ItemInfo):
                    Alert.show_alert("Vendor successfully Added")
+                   self.updated.emit()
                else:
                    Alert.show_alert("Some error occurred, Try again")
        except ValueError as ve:

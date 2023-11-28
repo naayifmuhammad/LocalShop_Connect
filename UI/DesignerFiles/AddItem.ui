@@ -128,6 +128,9 @@
                <property name="placeholderText">
                 <string>Vendor *</string>
                </property>
+               <property name="mandatory" stdset="0">
+                <bool>true</bool>
+               </property>
               </widget>
              </item>
              <item>
@@ -186,6 +189,9 @@
               <widget class="QComboBox" name="productCategory">
                <property name="placeholderText">
                 <string>Category *</string>
+               </property>
+               <property name="mandatory" stdset="0">
+                <bool>true</bool>
                </property>
               </widget>
              </item>

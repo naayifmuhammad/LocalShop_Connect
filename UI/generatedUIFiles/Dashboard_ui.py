@@ -16,10 +16,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QAbstractItemView, QApplication, QFrame, QGridLayout,
-    QHBoxLayout, QHeaderView, QLineEdit, QMainWindow,
-    QPushButton, QSizePolicy, QSpacerItem, QTableView,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
+    QGridLayout, QHBoxLayout, QHeaderView, QLineEdit,
+    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
+    QTableView, QVBoxLayout, QWidget)
 import icons_rc
 
 class Ui_Dashboard(object):
@@ -55,11 +55,19 @@ class Ui_Dashboard(object):
         self.dashboardCentralWidget.setObjectName(u"dashboardCentralWidget")
         self.verticalLayout = QVBoxLayout(self.dashboardCentralWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.Main = QHBoxLayout()
+        self.Main.setObjectName(u"Main")
         self.sideNavigation = QFrame(self.dashboardCentralWidget)
         self.sideNavigation.setObjectName(u"sideNavigation")
+        sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.sideNavigation.sizePolicy().hasHeightForWidth())
+        self.sideNavigation.setSizePolicy(sizePolicy)
         self.sideNavigation.setMinimumSize(QSize(0, 0))
+        self.sideNavigation.setStyleSheet(u"QPushButton:hover {\n"
+"    background-color: rgb(208, 208, 208);\n"
+"}")
         self.sideNavigation.setFrameShape(QFrame.StyledPanel)
         self.sideNavigation.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.sideNavigation)
@@ -116,7 +124,7 @@ class Ui_Dashboard(object):
         self.analytics = QPushButton(self.sideNavigation)
         self.analytics.setObjectName(u"analytics")
         self.analytics.setLayoutDirection(Qt.LeftToRight)
-        self.analytics.setStyleSheet(u"text-align:left;")
+        self.analytics.setStyleSheet(u"")
         icon4 = QIcon()
         icon4.addFile(u":/button-icons/analytics.png", QSize(), QIcon.Normal, QIcon.Off)
         self.analytics.setIcon(icon4)
@@ -154,7 +162,7 @@ class Ui_Dashboard(object):
         self.verticalLayout_2.addItem(self.verticalSpacer_2)
 
 
-        self.horizontalLayout_4.addWidget(self.sideNavigation)
+        self.Main.addWidget(self.sideNavigation)
 
         self.window2ColumnLayoutVertical = QHBoxLayout()
         self.window2ColumnLayoutVertical.setObjectName(u"window2ColumnLayoutVertical")
@@ -172,36 +180,43 @@ class Ui_Dashboard(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.itemNo = QLineEdit(self.ItemDetails)
         self.itemNo.setObjectName(u"itemNo")
+        self.itemNo.setMaximumSize(QSize(50, 16777215))
+        self.itemNo.setProperty("editable", False)
 
         self.horizontalLayout_2.addWidget(self.itemNo)
 
-        self.ProductCode = QLineEdit(self.ItemDetails)
+        self.ProductCode = QComboBox(self.ItemDetails)
         self.ProductCode.setObjectName(u"ProductCode")
 
         self.horizontalLayout_2.addWidget(self.ProductCode)
 
         self.HSNCode = QLineEdit(self.ItemDetails)
         self.HSNCode.setObjectName(u"HSNCode")
+        self.HSNCode.setProperty("editable", False)
 
         self.horizontalLayout_2.addWidget(self.HSNCode)
 
         self.SalePrice = QLineEdit(self.ItemDetails)
         self.SalePrice.setObjectName(u"SalePrice")
+        self.SalePrice.setProperty("editable", False)
 
         self.horizontalLayout_2.addWidget(self.SalePrice)
 
         self.Quantity = QLineEdit(self.ItemDetails)
         self.Quantity.setObjectName(u"Quantity")
+        self.Quantity.setProperty("editable", True)
 
         self.horizontalLayout_2.addWidget(self.Quantity)
 
         self.Discount = QLineEdit(self.ItemDetails)
         self.Discount.setObjectName(u"Discount")
+        self.Discount.setProperty("editable", True)
 
         self.horizontalLayout_2.addWidget(self.Discount)
 
         self.Amount = QLineEdit(self.ItemDetails)
         self.Amount.setObjectName(u"Amount")
+        self.Amount.setProperty("editable", False)
 
         self.horizontalLayout_2.addWidget(self.Amount)
 
@@ -216,26 +231,31 @@ class Ui_Dashboard(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.cgst = QLineEdit(self.taxDetails)
         self.cgst.setObjectName(u"cgst")
+        self.cgst.setProperty("editable", False)
 
         self.horizontalLayout_3.addWidget(self.cgst)
 
         self.sgst = QLineEdit(self.taxDetails)
         self.sgst.setObjectName(u"sgst")
+        self.sgst.setProperty("editable", False)
 
         self.horizontalLayout_3.addWidget(self.sgst)
 
         self.igst = QLineEdit(self.taxDetails)
         self.igst.setObjectName(u"igst")
+        self.igst.setProperty("editable", False)
 
         self.horizontalLayout_3.addWidget(self.igst)
 
         self.totalTax = QLineEdit(self.taxDetails)
         self.totalTax.setObjectName(u"totalTax")
+        self.totalTax.setProperty("editable", False)
 
         self.horizontalLayout_3.addWidget(self.totalTax)
 
         self.grandTotal = QLineEdit(self.taxDetails)
         self.grandTotal.setObjectName(u"grandTotal")
+        self.grandTotal.setProperty("editable", False)
 
         self.horizontalLayout_3.addWidget(self.grandTotal)
 
@@ -311,13 +331,12 @@ class Ui_Dashboard(object):
         self.window2ColumnLayoutVertical.addWidget(self.itemAddRow)
 
 
-        self.horizontalLayout_4.addLayout(self.window2ColumnLayoutVertical)
+        self.Main.addLayout(self.window2ColumnLayoutVertical)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout_4)
+        self.verticalLayout.addLayout(self.Main)
 
         Dashboard.setCentralWidget(self.dashboardCentralWidget)
-        QWidget.setTabOrder(self.ProductCode, self.Quantity)
         QWidget.setTabOrder(self.Quantity, self.Discount)
         QWidget.setTabOrder(self.Discount, self.addItemBtn)
         QWidget.setTabOrder(self.addItemBtn, self.cancelBtn)
@@ -341,7 +360,7 @@ class Ui_Dashboard(object):
     # setupUi
 
     def retranslateUi(self, Dashboard):
-        Dashboard.setWindowTitle(QCoreApplication.translate("Dashboard", u"MainWindow", None))
+        Dashboard.setWindowTitle(QCoreApplication.translate("Dashboard", u"LocalShop Connect", None))
         self.actionSettings.setText(QCoreApplication.translate("Dashboard", u"Settings", None))
         self.actionLog_out.setText(QCoreApplication.translate("Dashboard", u"Log out", None))
         self.actionAdd_staff.setText(QCoreApplication.translate("Dashboard", u"Add staff", None))
@@ -393,6 +412,7 @@ class Ui_Dashboard(object):
         self.Quantity.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Quantity", None))
         self.Discount.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Discount", None))
         self.Amount.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Amount", None))
+        self.Amount.setProperty("originalValue", "")
         self.cgst.setText("")
         self.cgst.setPlaceholderText(QCoreApplication.translate("Dashboard", u"CGST", None))
         self.sgst.setPlaceholderText(QCoreApplication.translate("Dashboard", u"SGST", None))

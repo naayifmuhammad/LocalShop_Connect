@@ -2,7 +2,7 @@
 
 /* Table Headers */
 QHeaderView::section {
-    background-color: #3498DB; /* Blue */
+    background-color: #383838; /* Blue */
     color: white;
     padding: 5px;
     border: none; /* Remove header borders */

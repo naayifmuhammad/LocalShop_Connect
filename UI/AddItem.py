@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QMainWindow, QLineEdit
+from PySide6.QtWidgets import QMainWindow, QLineEdit, QComboBox
 from PySide6.QtCore import Signal
 from models.models import Product
 from UI.UI_Manager import UI_Manager
@@ -18,6 +18,10 @@ class AddItemDialog(QMainWindow):
     addCategoryWindow = None
     finished = Signal()
     productDB = Product()
+    comboBox_vendors_data = None
+    comboBox_categories_data = None
+
+
     def __init__(self):
         super().__init__()
         self.ui = UI_Manager.AddItemUI()
@@ -31,10 +35,23 @@ class AddItemDialog(QMainWindow):
         self.ui.cancelItem.clicked.connect(self.cancelItem)
         self.ui.actionAdd_Vendors.triggered.connect(self.openAddNewVendor)
         self.ui.actionAdd_Categories.triggered.connect(self.openAddNewCategory)
+        self.ui.productCategory.addItems(self.productDB.fetchCategories())
+        self.ui.vendor.addItems(self.productDB.fetchVendors())
 
 
 
 
+
+    def updateDropDownData(self):
+        self.ui.productCategory.clear()
+        self.ui.vendor.clear()
+        self.ui.productCategory.addItems(self.productDB.fetchCategories())
+        self.ui.vendor.addItems(self.productDB.fetchVendors())
+        try:
+            self.addVendorWindow.updated.disconnect()
+            self.addCategoryWindow.updated.disconnect()
+        except AttributeError:
+            pass
 
 
     def attemptToAddProduct(self):
@@ -43,8 +60,8 @@ class AddItemDialog(QMainWindow):
                db_ItemInfo = {
                    'productCode': self.productInfo["productCode"],
                    'productName': self.productInfo["productName"],
-                   'vendorID': int(self.productInfo["vendor"]),
-                   'categoryID': int(self.productInfo["productCategory"]),
+                   'vendorID': str(self.productInfo["vendor"]),
+                   'categoryID': str(self.productInfo["productCategory"]),
                    'costPrice': float(self.productInfo["costPrice"]),
                    'salePrice': float(self.productInfo["salePrice"]),
                    'hsnCode': int(self.productInfo["hsnCode"]),
@@ -55,21 +72,35 @@ class AddItemDialog(QMainWindow):
                if self.productDB.addProduct(db_ItemInfo):
                    print("Product successfully added")
                    Alert.show_alert("Product successfully added to database")
+                   self.clear_input_fields()
 
                else:
                    Alert.show_alert("Some error occurred, Try again")
        except ValueError as ve:
         Alert.show_alert("Please check your input and try again")
 
+    def clear_input_fields(self):
+        for field in self.InputFields.values():
+            if isinstance(field, QLineEdit):
+                field.setText("")
+            if isinstance(field, QComboBox):
+                field.clear()
+
 
     def addNewProduct(self):
         #check if any fields are empty
         for field in self.InputFields.values():
-            if field.property("mandatory") and field.text() == "":
-                Alert.show_alert(f"Error {field.placeholderText()} is empty")
-                return False
+            if field.property("mandatory"):
+                if isinstance(field,QLineEdit) and field.text()=="":
+                    Alert.show_alert(f"Error {field.placeholderText()} is empty")
+                    return False
+
+                if isinstance(field,QComboBox) and field.currentText()=="":
+                    Alert.show_alert(f"Choose a {field.placeholderText()}")
+                    return False
+                self.productInfo[field.objectName()] = field.text() if isinstance(field, QLineEdit) else field.currentText()
             else:
-                self.productInfo[field.objectName()] = field.text()
+                self.productInfo[field.objectName()] = field.text() if isinstance(field, QLineEdit) else field.currentText()
         return True
 
 
@@ -82,13 +113,14 @@ class AddItemDialog(QMainWindow):
     def getFields(self,InputFieldList):
         inputFields = {}
         for field in InputFieldList:
-            if isinstance(field,QLineEdit):
+            if isinstance(field,QLineEdit) or isinstance(field,QComboBox):
                 inputFields[field.objectName()] = field
         return inputFields
 
     def openAddNewCategory(self):
         if self.addCategoryWindow is None or not self.addCategoryWindow.isVisible():
             self.addCategoryWindow = AddCategoriesDialog()
+            self.addCategoryWindow.updated.connect(self.updateDropDownData)
             self.addCategoryWindow.finished.connect(self.handleAddCategoryWindowClosed)
             self.addCategoryWindow.show()
 
@@ -101,6 +133,7 @@ class AddItemDialog(QMainWindow):
     def openAddNewVendor(self):
         if self.addVendorWindow is None or not self.addVendorWindow.isVisible():
             self.addVendorWindow = AddVendorDialog()
+            self.addVendorWindow.updated.connect(self.updateDropDownData)
             self.addVendorWindow.finished.connect(self.handleAddItemDialogClosed)
             self.addVendorWindow.show()
 

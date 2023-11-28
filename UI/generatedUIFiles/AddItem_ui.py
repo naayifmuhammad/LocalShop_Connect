@@ -104,6 +104,7 @@ class Ui_AddItem(object):
 
         self.vendor = QComboBox(self.ItemInfoFrame1)
         self.vendor.setObjectName(u"vendor")
+        self.vendor.setProperty("mandatory", True)
 
         self.verticalLayout_3.addWidget(self.vendor)
 
@@ -142,6 +143,7 @@ class Ui_AddItem(object):
 
         self.productCategory = QComboBox(self.ItemInfoFrame2)
         self.productCategory.setObjectName(u"productCategory")
+        self.productCategory.setProperty("mandatory", True)
 
         self.verticalLayout_2.addWidget(self.productCategory)
 
