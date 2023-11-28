@@ -17,7 +17,6 @@ class User:
         PRIMARY KEY("id" AUTOINCREMENT)
         )""")
 
-
     @staticmethod
     def register(userinfo):
         try:
@@ -101,6 +100,108 @@ class User:
                 return False
         except sqlite3.Error as error:
             return True
+
+class Product:
+    def __init__(self):
+        try:
+            cur.execute("""CREATE TABLE IF NOT EXISTS "categories" (
+            	    "id"	INTEGER NOT NULL,
+            	    "name"	TEXT NOT NULL UNIQUE,
+            	    "description"	TEXT,
+            	    PRIMARY KEY("id" AUTOINCREMENT)
+                    );""")
+
+            cur.execute("""CREATE TABLE IF NOT EXISTS "vendors" (
+        	"id"	INTEGER NOT NULL,
+        	"shopName"	TEXT NOT NULL UNIQUE,
+        	"ownerName"	TEXT,
+        	"location"	TEXT,
+        	PRIMARY KEY("id" AUTOINCREMENT)
+            );""")
+
+            cur.execute("""CREATE TABLE IF NOT EXISTS "products" (
+            "id"	INTEGER NOT NULL,
+            "productCode"	TEXT NOT NULL UNIQUE,
+            "productName"	TEXT NOT NULL UNIQUE,
+            "vendorID"	INTEGER NOT NULL,
+            "categoryID"	INTEGER NOT NULL,
+            "costPrice"	REAL NOT NULL,
+            "salePrice"	REAL NOT NULL,
+            "hsnCode"	INTEGER,
+            "taxRate"	INTEGER NOT NULL,
+            "qtyInStock"	INTEGER NOT NULL DEFAULT 0,
+            "minStockLevel"	INTEGER NOT NULL DEFAULT 0,
+            PRIMARY KEY("id" AUTOINCREMENT),
+            FOREIGN KEY("vendorID") REFERENCES "vendors"("id"),
+            FOREIGN KEY("categoryID") REFERENCES "categories"("id")
+            );""")
+        except sqlite3.Error as error:
+            print(error)
+
+    @staticmethod
+    def addProduct(prodInfo):
+        try:
+            # Insert data into the "products" table
+            cur.execute("""
+                INSERT INTO "main"."products" ("productCode", "productName", "vendorID", "categoryID", "costPrice", "salePrice", "hsnCode", "taxRate", "qtyInStock", "minStockLevel") 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                prodInfo["productCode"],
+                prodInfo["productName"],
+                prodInfo["vendorID"],
+                prodInfo["categoryID"],
+                prodInfo["costPrice"],
+                prodInfo["salePrice"],
+                prodInfo["hsnCode"],
+                prodInfo["taxRate"],
+                prodInfo["qtyInStock"],
+                prodInfo["minStockLevel"]
+            ))
+
+            # Commit the transaction
+            con.commit()
+
+        except sqlite3.Error as error:
+            return False
+        return True\
+
+    @staticmethod
+    def addVendor(vendorInfo):
+        try:
+            # Insert data into the "products" table
+            cur.execute("""
+                INSERT INTO "main"."vendors" ("shopName", "ownerName","location") VALUES (?, ?, ?);
+            """, (
+                vendorInfo["shopName"],
+                vendorInfo["ownerName"],
+                vendorInfo["location"],
+            ))
+
+            # Commit the transaction
+            con.commit()
+
+        except sqlite3.Error as error:
+            print(error)
+            return False
+        return True
+
+    @staticmethod
+    def addCategory(categoryInfo):
+        try:
+            # Insert data into the "products" table
+            cur.execute("""
+                INSERT INTO "main"."categories" ("name", "description") VALUES (?, ?);
+            """, (
+                categoryInfo["name"],
+                categoryInfo["description"],
+            ))
+
+            # Commit the transaction
+            con.commit()
+
+        except sqlite3.Error as error:
+            return False
+        return True
 
 
 

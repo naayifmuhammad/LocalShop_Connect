@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddItem</class>
- <widget class="QMainWindow" name="AddItem">
+ <class>AddVendor</class>
+ <widget class="QMainWindow" name="AddVendor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Add New Item</string>
+   <string>Add Vendor</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Assets/Icons/icons.qrc">
@@ -88,7 +88,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Add New Item</string>
+          <string>Add New Vendor</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -105,7 +105,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QFrame" name="ItemInfoFrame1">
+           <widget class="QFrame" name="InputFields">
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -114,9 +114,9 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
-              <widget class="QLineEdit" name="productCode">
+              <widget class="QLineEdit" name="vendorName">
                <property name="placeholderText">
-                <string>Product Code *</string>
+                <string>Vendor Name *</string>
                </property>
                <property name="mandatory" stdset="0">
                 <bool>true</bool>
@@ -124,95 +124,19 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="vendor">
+              <widget class="QLineEdit" name="ownerName">
                <property name="placeholderText">
-                <string>Vendor *</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="costPrice">
-               <property name="placeholderText">
-                <string>Cost Price *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="taxRate">
-               <property name="placeholderText">
-                <string>Tax Rate *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="qtyInStock">
-               <property name="placeholderText">
-                <string>Qty in Stock</string>
+                <string>Shop Owner Name</string>
                </property>
                <property name="mandatory" stdset="0">
                 <bool>false</bool>
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="ItemInfoFrame2">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QLineEdit" name="productName">
+              <widget class="QLineEdit" name="location">
                <property name="placeholderText">
-                <string>Product Name *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="productCategory">
-               <property name="placeholderText">
-                <string>Category *</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="hsnCode">
-               <property name="placeholderText">
-                <string>HSN Code *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="salePrice">
-               <property name="placeholderText">
-                <string>Sale Price *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="minStockLevel">
-               <property name="placeholderText">
-                <string>Min Stock Level</string>
+                <string>Location</string>
                </property>
                <property name="mandatory" stdset="0">
                 <bool>false</bool>
@@ -248,14 +172,14 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="addItem">
+           <widget class="QPushButton" name="add">
             <property name="text">
              <string>Add</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="cancelItem">
+           <widget class="QPushButton" name="cancel">
             <property name="text">
              <string>Cancel</string>
             </property>
@@ -281,32 +205,6 @@
      </spacer>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuAdd_Remove">
-    <property name="title">
-     <string>Vendors</string>
-    </property>
-    <addaction name="actionAdd_Vendors"/>
-    <addaction name="actionRemove_Vendors"/>
-   </widget>
-   <widget class="QMenu" name="menuCategories_2">
-    <property name="title">
-     <string>Categories</string>
-    </property>
-    <addaction name="actionAdd_Categories"/>
-    <addaction name="actionRemove_Categories"/>
-   </widget>
-   <addaction name="menuAdd_Remove"/>
-   <addaction name="menuCategories_2"/>
   </widget>
   <action name="actionAdd_new_category">
    <property name="text">
@@ -360,14 +258,9 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>productCode</tabstop>
-  <tabstop>productName</tabstop>
-  <tabstop>costPrice</tabstop>
-  <tabstop>hsnCode</tabstop>
-  <tabstop>taxRate</tabstop>
-  <tabstop>salePrice</tabstop>
-  <tabstop>qtyInStock</tabstop>
-  <tabstop>minStockLevel</tabstop>
+  <tabstop>vendorName</tabstop>
+  <tabstop>ownerName</tabstop>
+  <tabstop>location</tabstop>
  </tabstops>
  <resources>
   <include location="../Assets/Icons/icons.qrc"/>

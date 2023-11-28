@@ -3,11 +3,13 @@ from PySide6.QtWidgets import QLineEdit, QPushButton, QMainWindow
 from UI.UI_Manager import UI_Manager
 from Themes.Themes import Theme
 from configurations.Config import Config
+from UI.AddItem import AddItemDialog
+
 
 cnf = Config.getInstance()
 
 class DashboardWindow(QMainWindow):
-    addStaffWindow = None
+    addNewItemWindow = None  # Instance variable to store AddNewItemWindow instance
     InputFields = {}
     sideNavButtons = {}
     sidenavToggled = False
@@ -17,11 +19,8 @@ class DashboardWindow(QMainWindow):
         self.itemInputFields = None
         self.ui = UI_Manager.DashboardUI()
         self.ui.setupUi(self)
-        # self.makeframeLess(True)
-        # self.setupTitleBar(self,True)
         cnf.setTheme(self, Theme.Dashboard)
         cnf.setTheme(self.ui.sideNavigation,Theme.sideNavigation)
-
 
 
 
@@ -41,11 +40,25 @@ class DashboardWindow(QMainWindow):
         self.setupInputFields()
         self.sideNavButtons = self.setupSideNavButtons(self.ui.sideNavigation.children())
         self.sideNavButtons["hamburger"].clicked.connect(self.toggleSideNav)
-        cnf.setTheme(self.ui.sideNavigation, Theme.sideNavigation)
+        self.sideNavButtons['products'].clicked.connect(self.inventoryManager)
 
 
 
 
+
+
+
+
+    #add an inventory manager that adds and keeps track of new products:
+    def inventoryManager(self):
+        if self.addNewItemWindow is None or not self.addNewItemWindow.isVisible():
+            self.addNewItemWindow = AddItemDialog()
+            self.addNewItemWindow.finished.connect(self.handleAddItemDialogClosed)
+            self.addNewItemWindow.show()
+
+    def handleAddItemDialogClosed(self):
+        # Slot to handle the closing of the AddItemDialog
+        self.addNewItemWindow = None
 
     #get all input fields related to item to later fetch data from it and clear it
     def getFields(self,InputFieldList):
@@ -84,6 +97,7 @@ class DashboardWindow(QMainWindow):
     def setComponents(self,dialog):
         self.addStaffWindow = dialog
 
+
 ############################### table data methods ##########################################
 
     def add_row_to_cart(self):
@@ -111,7 +125,6 @@ class DashboardWindow(QMainWindow):
 
     def getDataFromRow(self):
         row_data = self.get_table_row_data(self.InputFields)
-
         if row_data:
             return row_data
         else:
@@ -137,17 +150,6 @@ class DashboardWindow(QMainWindow):
        pass
 
 
-############################### table data methods end ##########################################
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -155,7 +157,3 @@ class DashboardWindow(QMainWindow):
     def startMaximised(self):
         self.showMaximized()
 
-
-
-if __name__ == "__main__":
-    dashboard = DashboardWindow()

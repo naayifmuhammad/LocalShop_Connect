@@ -2,7 +2,7 @@ from PySide6 import QtCore
 from PySide6.QtCore import QPoint
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QMainWindow, QSizePolicy, QSpacerItem
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QMainWindow, QSizePolicy, QSpacerItem, QMessageBox
 from configurations.Config import Config
 from Themes.Themes import Theme
 
@@ -99,4 +99,14 @@ class FrameLessWindow(QMainWindow):
         self.customTitleBar.closeBtn.mousePressEvent = self.closeWindow
         self.customTitleBar.minimizeBtn.mousePressEvent = self.minimizeWindow
 
+class Alert:
+
+    @staticmethod
+    def show_alert(msg,title="Alert"):
+        msg_box = QMessageBox()
+        msg_box.setIcon(QMessageBox.Information)
+        msg_box.setText(msg)
+        msg_box.setWindowTitle(title)
+        msg_box.setStandardButtons(QMessageBox.Ok)
+        msg_box.exec_()
 

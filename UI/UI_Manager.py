@@ -1,8 +1,9 @@
 from UI.generatedUIFiles.LoginPage_ui import Ui_Login as Login
 from UI.generatedUIFiles.Dashboard_ui import Ui_Dashboard as Dashboard
 from UI.generatedUIFiles.AddNewStaff_ui import Ui_AddNewStaffDialog as AddStaffWindow
-from UI.generatedUIFiles.AddItem_ui import Ui_AddNewStaffDialog as AddNewItemWindow
+from UI.generatedUIFiles.AddItem_ui import Ui_AddItem as AddNewItemWindow
 from UI.generatedUIFiles.Register_ui import Ui_RegisterWindow as RegisterWindow
+from UI.generatedUIFiles import AddVendors_ui, AddCategories_ui
 from UI.generatedUIFiles.PopUp_ui import Ui_PopUp
 
 class UI_Manager:
@@ -12,6 +13,8 @@ class UI_Manager:
     DashboardUI = Dashboard
     AddStaffUI = AddStaffWindow
     AddItemUI = AddNewItemWindow
+    AddVendor = AddVendors_ui.Ui_AddVendor
+    AddCategories = AddCategories_ui.Ui_AddCategory
     RegisterUI = RegisterWindow
     PopUpUI = Ui_PopUp
 

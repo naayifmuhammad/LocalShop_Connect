@@ -1,0 +1,23 @@
+QPushButton#addItem {
+    background-color: #07971B; /* green */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+}
+
+QPushButton#addItem:hover {
+    background-color: #065912; /* Darker blue on hover */
+}
+
+QPushButton#cancelItem {
+    background-color: #E11317; /* red */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+}
+
+QPushButton#cancelItem:hover {
+    background-color: #840D0F; /* Darker blue on hover */
+}

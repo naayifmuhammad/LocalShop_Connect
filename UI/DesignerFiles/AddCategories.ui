@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddItem</class>
- <widget class="QMainWindow" name="AddItem">
+ <class>AddCategory</class>
+ <widget class="QMainWindow" name="AddCategory">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>803</width>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Add New Item</string>
+   <string>Add Vendor</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../Assets/Icons/icons.qrc">
@@ -19,21 +19,8 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="1">
-     <spacer name="verticalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="0">
-     <spacer name="horizontalSpacer">
+    <item row="0" column="2">
+     <spacer name="horizontalSpacer_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -46,19 +33,6 @@
      </spacer>
     </item>
     <item row="0" column="1">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="1">
      <widget class="QFrame" name="Main">
       <property name="minimumSize">
        <size>
@@ -74,6 +48,19 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QLabel" name="headerLabel">
          <property name="maximumSize">
           <size>
@@ -88,7 +75,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Add New Item</string>
+          <string>Add Category</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -105,7 +92,7 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QFrame" name="ItemInfoFrame1">
+           <widget class="QFrame" name="InputFields">
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -114,9 +101,9 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
-              <widget class="QLineEdit" name="productCode">
+              <widget class="QLineEdit" name="name">
                <property name="placeholderText">
-                <string>Product Code *</string>
+                <string>Category Name *</string>
                </property>
                <property name="mandatory" stdset="0">
                 <bool>true</bool>
@@ -124,95 +111,9 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="vendor">
+              <widget class="QLineEdit" name="description">
                <property name="placeholderText">
-                <string>Vendor *</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="costPrice">
-               <property name="placeholderText">
-                <string>Cost Price *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="taxRate">
-               <property name="placeholderText">
-                <string>Tax Rate *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="qtyInStock">
-               <property name="placeholderText">
-                <string>Qty in Stock</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>false</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="ItemInfoFrame2">
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
-             <item>
-              <widget class="QLineEdit" name="productName">
-               <property name="placeholderText">
-                <string>Product Name *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="productCategory">
-               <property name="placeholderText">
-                <string>Category *</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="hsnCode">
-               <property name="placeholderText">
-                <string>HSN Code *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="salePrice">
-               <property name="placeholderText">
-                <string>Sale Price *</string>
-               </property>
-               <property name="mandatory" stdset="0">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="minStockLevel">
-               <property name="placeholderText">
-                <string>Min Stock Level</string>
+                <string>Description</string>
                </property>
                <property name="mandatory" stdset="0">
                 <bool>false</bool>
@@ -248,14 +149,14 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="addItem">
+           <widget class="QPushButton" name="add">
             <property name="text">
              <string>Add</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="cancelItem">
+           <widget class="QPushButton" name="cancel">
             <property name="text">
              <string>Cancel</string>
             </property>
@@ -267,8 +168,21 @@
       </layout>
      </widget>
     </item>
-    <item row="1" column="2">
-     <spacer name="horizontalSpacer_2">
+    <item row="1" column="1">
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0">
+     <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -281,32 +195,6 @@
      </spacer>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuAdd_Remove">
-    <property name="title">
-     <string>Vendors</string>
-    </property>
-    <addaction name="actionAdd_Vendors"/>
-    <addaction name="actionRemove_Vendors"/>
-   </widget>
-   <widget class="QMenu" name="menuCategories_2">
-    <property name="title">
-     <string>Categories</string>
-    </property>
-    <addaction name="actionAdd_Categories"/>
-    <addaction name="actionRemove_Categories"/>
-   </widget>
-   <addaction name="menuAdd_Remove"/>
-   <addaction name="menuCategories_2"/>
   </widget>
   <action name="actionAdd_new_category">
    <property name="text">
@@ -360,14 +248,8 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>productCode</tabstop>
-  <tabstop>productName</tabstop>
-  <tabstop>costPrice</tabstop>
-  <tabstop>hsnCode</tabstop>
-  <tabstop>taxRate</tabstop>
-  <tabstop>salePrice</tabstop>
-  <tabstop>qtyInStock</tabstop>
-  <tabstop>minStockLevel</tabstop>
+  <tabstop>name</tabstop>
+  <tabstop>description</tabstop>
  </tabstops>
  <resources>
   <include location="../Assets/Icons/icons.qrc"/>
