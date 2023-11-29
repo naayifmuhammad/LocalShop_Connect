@@ -20,6 +20,7 @@ class DashboardWindow(QMainWindow):
     bill_ItemNo = 1
     SingleItemInfo = None
     taxRate= None
+    headers = []
     def __init__(self):
         #just UI setup part
         super().__init__()
@@ -43,7 +44,8 @@ class DashboardWindow(QMainWindow):
         # Create a model
         self.model = QStandardItemModel()
         self.table_view.setModel(self.model)
-        self.model.setHorizontalHeaderLabels(["ItemNo", "Product ID", "HSN Code", "Sale Price", "Qty", "Discount", "Amount"])
+        self.headers = ['Item No', "Product Code", 'HSN Code', 'Sale Price', 'Quantity', 'Discount', 'Amount', 'CGST', 'SGST', 'IGST','Total Tax','Grand Total']
+        self.model.setHorizontalHeaderLabels(self.headers)
         #gathers references to inputfields
         self.setupInputFields()
 
@@ -170,7 +172,7 @@ class DashboardWindow(QMainWindow):
     def add_row_to_cart(self):
         #if any field is empty
         for field in self.InputFields.values():
-            if field.text() == "":
+            if field.text() == "" and not field.objectName()=="Discount":
                 Alert.show_alert(f"Error: {field.objectName()} is empty")
                 return False
         try:
@@ -204,13 +206,12 @@ class DashboardWindow(QMainWindow):
             print(f"No data found")
 
     def get_table_row_data(self, inputFields):
-        row_data = {}
-
+        row_data = {key: None for key in self.headers}
         for field in inputFields.values():
             item = field.text()
-
-            column_name = field.objectName()
+            column_name = field.placeholderText()
             row_data[column_name] = item
+        row_data[self.ui.ProductCode.placeholderText()] = self.currentProductCode(self.ui.ProductCode.currentIndex())
         return row_data
 
 
@@ -302,7 +303,7 @@ class DashboardWindow(QMainWindow):
         igst_amount = round(price * (igst_rate / 100), 2)
 
         totalTax = cgst_amount+sgst_amount+igst_amount
-        grandTotal = price + totalTax
+        grandTotal = round(price + totalTax, 2)
 
         return {
             'CGST': cgst_amount,

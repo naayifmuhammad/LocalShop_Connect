@@ -2,7 +2,7 @@
 
 /* Table Headers */
 QHeaderView::section {
-    background-color: #383838; /* Blue */
+    background-color: #383838; /* Dark gray for header background */
     color: white;
     padding: 5px;
     border: none; /* Remove header borders */
@@ -11,7 +11,7 @@ QHeaderView::section {
 /* Table Rows */
 QTableWidget {
     background-color: white;
-    selection-background-color: #3498DB; /* Blue */
+    selection-background-color: #3498DB; /* Blue for selection background */
     border: 1px solid #E0E0E0; /* Light gray border */
     border-radius: 4px;
 }
@@ -31,6 +31,22 @@ QTableWidget:item {
     border: none; /* Remove cell borders */
 }
 
+/* Table View */
+QTableView {
+    border: none;
+    border-radius: 4px;
+    background: white;
+}
+
+/* Even Column Background */
+QTableView QHeaderView::section:even {
+    background-color: #2C2C2C; /* Light gray for even columns */
+}
+
+/* Odd Column Background */
+QTableView QHeaderView::section:odd {
+    background-color: #2C2C2C; /* White for odd columns */
+}
 
 QPushButton#addItemBtn, QPushButton#confirmBillBtn {
     background-color: #07971B; /* green */
