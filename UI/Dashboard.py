@@ -10,6 +10,39 @@ from extras.UI_Functionalities import Alert
 
 cnf = Config.getInstance()
 
+
+class BillItemList:
+    items = []
+    grandTotalFieldToUpdate = None
+    billTable = None
+
+    def __init__(self,totalField,table):
+        self.grandTotalFieldToUpdate = totalField
+        self.billTable = table
+
+
+    def addToBill(self,item):
+        self.items.append(item)
+        return True
+
+
+    def calculateTotal(self):
+        sum = 0
+        for row, item in enumerate(self.items):
+            total = float(item["Grand Total"])
+            sum += total
+        self.grandTotalFieldToUpdate.setText(str(sum))
+
+    def clearCart(self):
+        self.items = []
+        self.billTable.clear()
+        headers = ['Item No', "Product Code", 'HSN Code', 'Sale Price', 'Quantity', 'Discount', 'Amount', 'CGST',
+                        'SGST', 'IGST', 'Total Tax', 'Grand Total']
+        self.billTable.setHorizontalHeaderLabels(headers)
+        self.grandTotalFieldToUpdate.setText("")
+
+
+
 class DashboardWindow(QMainWindow):
     addNewItemWindow = None  # Instance variable to store AddNewItemWindow instance
     InputFields = {}
@@ -17,6 +50,7 @@ class DashboardWindow(QMainWindow):
     sidenavToggled = False
     product_code_combo = None
     billDB = Bill()
+    billItems = None
     bill_ItemNo = 1
     SingleItemInfo = None
     taxRate= None
@@ -33,11 +67,6 @@ class DashboardWindow(QMainWindow):
         #this part shows the added products
         self.table_view = self.ui.cartView
 
-
-        #setup UI buttons actions
-        self.ui.addItemBtn.clicked.connect(self.add_row_to_cart)
-        self.ui.cancelBtn.clicked.connect(self.cancel_Item)
-
         #setup initial bill info
         self.ui.itemNo.setText(str(self.bill_ItemNo))
 
@@ -46,8 +75,10 @@ class DashboardWindow(QMainWindow):
         self.table_view.setModel(self.model)
         self.headers = ['Item No', "Product Code", 'HSN Code', 'Sale Price', 'Quantity', 'Discount', 'Amount', 'CGST', 'SGST', 'IGST','Total Tax','Grand Total']
         self.model.setHorizontalHeaderLabels(self.headers)
-        #gathers references to inputfields
+        #gathers references to input fields
         self.setupInputFields()
+        self.billItems = BillItemList(self.ui.totalAmountCalculated,self.model)
+
 
 
         #sidenavigation configurations
@@ -71,8 +102,16 @@ class DashboardWindow(QMainWindow):
         self.ui.Discount.textChanged.connect(self.discountChanged)
         self.ui.Amount.textChanged.connect(self.amountChanged)
 
+        # setup UI buttons actions
+        self.ui.addItemBtn.clicked.connect(self.add_row_to_cart)
+        self.ui.cancelBtn.clicked.connect(self.cancel_Item)
+        self.ui.cancelBillBtn.clicked.connect(self.cancelBillButtonClicked)
 
 
+
+
+    def cancelBillButtonClicked(self):
+        self.billItems.clearCart()
 
     def onceProductCodeSelected(self):
         if not self.product_code_combo.currentIndex() == -1:
@@ -86,6 +125,7 @@ class DashboardWindow(QMainWindow):
         #update UI elements
         self.InputFields["HSNCode"].setText(str(self.SingleItemInfo['hsnCode']))
         self.InputFields["SalePrice"].setText(str(self.SingleItemInfo['salePrice']))
+
 
 
 
@@ -176,13 +216,16 @@ class DashboardWindow(QMainWindow):
                 Alert.show_alert(f"Error: {field.objectName()} is empty")
                 return False
         try:
-            data = self.get_table_row_data(self.InputFields)
+            billItem = self.get_table_row_data(self.InputFields)
+            self.billItems.addToBill(billItem)
+            self.billItems.calculateTotal()
+
         except AttributeError as aE:
             print(aE)
         else:
             current_row_count = self.model.rowCount()
             self.model.insertRow(current_row_count)
-            for col, col_data in enumerate(data.values()):
+            for col, col_data in enumerate(billItem.values()):
                 item = QStandardItem(col_data)
                 self.model.setItem(current_row_count, col, item)
             self.bill_ItemNo += 1

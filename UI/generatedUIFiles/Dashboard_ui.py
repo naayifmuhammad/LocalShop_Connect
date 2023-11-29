@@ -17,9 +17,9 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
-    QGridLayout, QHBoxLayout, QHeaderView, QLineEdit,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QTableView, QVBoxLayout, QWidget)
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QTableView, QVBoxLayout, QWidget)
 import icons_rc
 
 class Ui_Dashboard(object):
@@ -291,19 +291,14 @@ class Ui_Dashboard(object):
         self.CartFrame.setFrameShadow(QFrame.Raised)
         self.gridLayout = QGridLayout(self.CartFrame)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.confirmBillBtn = QPushButton(self.CartFrame)
-        self.confirmBillBtn.setObjectName(u"confirmBillBtn")
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout.addWidget(self.confirmBillBtn, 1, 1, 1, 1)
+        self.gridLayout.addItem(self.horizontalSpacer_2, 2, 0, 1, 1)
 
         self.cancelBillBtn = QPushButton(self.CartFrame)
         self.cancelBillBtn.setObjectName(u"cancelBillBtn")
 
-        self.gridLayout.addWidget(self.cancelBillBtn, 1, 2, 1, 1)
-
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout.addItem(self.horizontalSpacer_2, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.cancelBillBtn, 2, 2, 1, 1)
 
         self.cartView = QTableView(self.CartFrame)
         self.cartView.setObjectName(u"cartView")
@@ -319,6 +314,30 @@ class Ui_Dashboard(object):
         self.cartView.verticalHeader().setVisible(False)
 
         self.gridLayout.addWidget(self.cartView, 0, 0, 1, 3)
+
+        self.confirmBillBtn = QPushButton(self.CartFrame)
+        self.confirmBillBtn.setObjectName(u"confirmBillBtn")
+
+        self.gridLayout.addWidget(self.confirmBillBtn, 2, 1, 1, 1)
+
+        self.frame = QFrame(self.CartFrame)
+        self.frame.setObjectName(u"frame")
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.frame)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.totalAmountLabel = QLabel(self.frame)
+        self.totalAmountLabel.setObjectName(u"totalAmountLabel")
+
+        self.horizontalLayout_4.addWidget(self.totalAmountLabel)
+
+        self.totalAmountCalculated = QLabel(self.frame)
+        self.totalAmountCalculated.setObjectName(u"totalAmountCalculated")
+
+        self.horizontalLayout_4.addWidget(self.totalAmountCalculated)
+
+
+        self.gridLayout.addWidget(self.frame, 1, 1, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.CartFrame)
@@ -422,7 +441,9 @@ class Ui_Dashboard(object):
         self.grandTotal.setPlaceholderText(QCoreApplication.translate("Dashboard", u"Grand Total", None))
         self.addItemBtn.setText(QCoreApplication.translate("Dashboard", u"Add Item", None))
         self.cancelBtn.setText(QCoreApplication.translate("Dashboard", u"Cancel Item", None))
-        self.confirmBillBtn.setText(QCoreApplication.translate("Dashboard", u"Print Bill", None))
         self.cancelBillBtn.setText(QCoreApplication.translate("Dashboard", u"Cancel Bill", None))
+        self.confirmBillBtn.setText(QCoreApplication.translate("Dashboard", u"Print Bill", None))
+        self.totalAmountLabel.setText(QCoreApplication.translate("Dashboard", u"Total Amount:", None))
+        self.totalAmountCalculated.setText("")
     # retranslateUi
 
