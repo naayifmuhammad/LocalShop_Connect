@@ -1,3 +1,6 @@
+import os
+import sys
+
 from PySide6.QtCore import QEvent
 from PySide6.QtGui import QStandardItem, QStandardItemModel, Qt, QDoubleValidator
 from PySide6.QtWidgets import QLineEdit, QPushButton, QMainWindow, QCompleter, QComboBox, QAbstractItemView
@@ -7,7 +10,7 @@ from configurations.Config import Config
 from UI.AddItem import AddItemDialog
 from models.models import Product,Bill
 from extras.UI_Functionalities import Alert
-from extras.generateBill import generate_bill
+from extras.generateBill import generate_bill, BillViewer
 
 
 cnf = Config.getInstance()
@@ -46,12 +49,6 @@ class BillItemList:
         dashboardItems.ui.itemNo.setText(str(dashboardItems.bill_ItemNo))
 
 
-
-
-
-
-
-
 class DashboardWindow(QMainWindow):
     addNewItemWindow = None  # Instance variable to store AddNewItemWindow instance
     InputFields = {}
@@ -64,6 +61,7 @@ class DashboardWindow(QMainWindow):
     SingleItemInfo = None
     taxRate= None
     headers = []
+    billRenderer = None
     def __init__(self):
         #just UI setup part
         super().__init__()
@@ -93,8 +91,6 @@ class DashboardWindow(QMainWindow):
 
         # this makes the cart table non editable
         self.table_view.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
-        # self.table_view.setFocusPolicy(Qt.StrongFocus)
-        # self.table_view.setSelectionMode(QAbstractItemView.SingleSelection)
         self.setup_cart_view()
         self.model.rowsInserted.connect(self.resetItemNo)
         self.model.rowsRemoved.connect(self.resetItemNo)
@@ -132,7 +128,16 @@ class DashboardWindow(QMainWindow):
 
 
     def printBillBtnClicked(self):
-        generate_bill(self.billItems.items)
+       try:
+           filename = generate_bill(self.billItems.items)
+           PATH = os.getcwd()
+           pdf_path = str(PATH + "\\" + filename)
+           if pdf_path:
+               pdf_path = pdf_path.replace("\\", "/")
+               self.billRenderer = BillViewer(pdf_path)
+               self.billRenderer.show()
+       except Exception as e:
+           print(e)
 
     def handle_remove_button_clicked(self, index):
         row = index.row()
