@@ -244,26 +244,50 @@ class Product:
             print(err)
 
 
-
-
-#create class to save billInformation
-class Bill:
+class Order:
     def __init__(self):
+        cur.execute("""CREATE TABLE IF NOT EXISTS order_log (
+        order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+        );""")
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS sales_log (
+        sl_no INTEGER PRIMARY KEY,
+        orderNo INTEGER REFERENCES order_log(order_id),
+        productCode TEXT,
+        quantity INTEGER,
+        discount REAL); """)
+
+
+
+    @staticmethod
+    def placeOrder(cartItems):
+        print("this is the cart items list that I am sending: ",cartItems)
         try:
-            cur.execute("""CREATE TABLE IF NOT EXISTS "bill" (
-    	    "billNo"	INTEGER,
-    	    "datetime_column"	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    	    "amount"	REAL NOT NULL DEFAULT 0,
-    	    PRIMARY KEY("billNo" AUTOINCREMENT)
-            );""")
+            cur.execute("""INSERT INTO order_log (date_time) VALUES (CURRENT_TIMESTAMP);""")
+            con.commit()
+            cur.execute("""SELECT max(order_id) AS order_id from order_log""")
+            res = cur.fetchone()
+            order_id = res[0]
+            if order_id is None:
+                return False
+
+            #now for inserting the cart items for the particular order:
+            for item in cartItems:
+                insert_query = """
+                                INSERT INTO sales_log (orderNo, productCode, quantity, discount)
+                                VALUES (?, ?, ?, ?)
+                            """
+                cur.execute(insert_query, (
+                    order_id,
+                    item['product_code'],
+                    item['quantity'],
+                    item['discount']
+                ))
+            con.commit()
+
         except sqlite3.Error as error:
             print(error)
-
-
-    def getBillNo(self):
-        cur.execute("""select max(billNo) from bill;""")
-        row = cur.fetchone()
-        billNo = int(row[0])+1
-        return billNo
-
+            return False, error
+        return True
 

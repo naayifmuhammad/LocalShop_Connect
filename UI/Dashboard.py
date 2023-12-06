@@ -1,16 +1,15 @@
 import os
-import sys
-
 from PySide6.QtCore import QEvent
 from PySide6.QtGui import QStandardItem, QStandardItemModel, Qt, QDoubleValidator
-from PySide6.QtWidgets import QLineEdit, QPushButton, QMainWindow, QCompleter, QComboBox, QAbstractItemView
+from PySide6.QtWidgets import QLineEdit, QPushButton, QMainWindow, QCompleter, QComboBox, QAbstractItemView, QMessageBox
 from UI.UI_Manager import UI_Manager
 from Themes.Themes import Theme
 from configurations.Config import Config
 from UI.AddItem import AddItemDialog
-from models.models import Product,Bill
+from models.models import Product, Order
 from extras.UI_Functionalities import Alert
 from extras.generateBill import generate_bill, BillViewer
+
 
 
 cnf = Config.getInstance()
@@ -55,7 +54,6 @@ class DashboardWindow(QMainWindow):
     sideNavButtons = {}
     sidenavToggled = False
     product_code_combo = None
-    billDB = Bill()
     billItems = None
     bill_ItemNo = 1
     SingleItemInfo = None
@@ -126,18 +124,50 @@ class DashboardWindow(QMainWindow):
             if not isinstance(field,QComboBox):
                 field.setValidator(IntValidator)
 
+    def updateDBWithCurrentPurchase(self,itemList):
+        try:
+            cart = []
+            orderModel = Order()
+            for item in itemList:
+                purchase_data = {'product_code': item['Product Code'], 'quantity': item["Quantity"], 'discount': item["Discount"]}
+                cart.append(purchase_data)
+            if not orderModel.placeOrder(cart):
+                Alert.show_alert("Some error occured: try again")
+                return False
+            return True
+
+
+        except Exception as err:
+            Alert.show_alert("Some error occured: \n",err)
 
     def printBillBtnClicked(self):
-       try:
-           filename = generate_bill(self.billItems.items)
-           PATH = os.getcwd()
-           pdf_path = str(PATH + "\\" + filename)
-           if pdf_path:
-               pdf_path = pdf_path.replace("\\", "/")
-               self.billRenderer = BillViewer(pdf_path)
-               self.billRenderer.show()
-       except Exception as e:
-           print(e)
+        try:
+            # Show confirmation dialog
+            reply = QMessageBox.question(
+                self,
+                'Purchase Confirmation',
+                'Are you sure you want to confirm the purchase?',
+                QMessageBox.Yes | QMessageBox.No,
+                QMessageBox.No
+            )
+
+            if reply == QMessageBox.Yes:
+
+                #before printing, update the DB with current purchase once the user confirm
+                self.updateDBWithCurrentPurchase(self.billItems.items)
+
+
+                # User clicked Yes, proceed with printing
+                filename = generate_bill(self.billItems.items)
+                PATH = os.getcwd()
+                pdf_path = str(PATH + "\\" + filename)
+
+                if pdf_path:
+                    pdf_path = pdf_path.replace("\\", "/")
+                    self.billRenderer = BillViewer(pdf_path)
+                    self.billRenderer.show()
+        except Exception as e:
+            print(e)
 
     def handle_remove_button_clicked(self, index):
         row = index.row()
