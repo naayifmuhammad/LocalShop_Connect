@@ -1,5 +1,8 @@
 import sqlite3
 import re
+from datetime import datetime
+from models.server import SyncProducts
+
 con = sqlite3.connect("localShopConnectDB.db")
 cur = con.cursor()
 
@@ -120,6 +123,14 @@ class Product:
         	PRIMARY KEY("id" AUTOINCREMENT)
             );""")
 
+            cur.execute("""CREATE TABLE IF NOT EXISTS sync_products (
+            sl_no INTEGER PRIMARY KEY AUTOINCREMENT,
+            product_id INTEGER NOT NULL,
+            is_synced TEXT,
+            synced_datetime DATETIME,
+            FOREIGN KEY (product_id) REFERENCES products (id)
+            );""")
+
             cur.execute("""CREATE TABLE IF NOT EXISTS "products" (
         	"id"	INTEGER NOT NULL,
         	"productCode"	TEXT NOT NULL UNIQUE,
@@ -136,6 +147,7 @@ class Product:
         	FOREIGN KEY("categoryID") REFERENCES "categories"("name"),
         	PRIMARY KEY("id" AUTOINCREMENT)
             )""")
+
         except sqlite3.Error as error:
             print(error)
 
@@ -162,9 +174,82 @@ class Product:
             # Commit the transaction
             con.commit()
 
+            # Get the last inserted row ID (product ID)
+            product_id = cur.lastrowid
+
+            # Call the function to add to sync_products table
+            Product.add_to_sync_products_table(product_id)
+
         except sqlite3.Error as error:
             return False
-        return True\
+        return True
+
+    @staticmethod
+    def add_to_sync_products_table(product_id):
+        try:
+            # Insert data into the "sync_products" table
+            cur.execute("""
+                  INSERT INTO "main"."sync_products" ("product_id", "is_synced", "synced_datetime") 
+                  VALUES (?, 'False', ?)
+              """, (
+                product_id,
+                datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            ))
+
+            # Commit the transaction
+            con.commit()
+
+        except sqlite3.Error as error:
+            print(f"Error adding to sync_products table: {error}")
+
+    @staticmethod
+    def start_syncing_products():
+        try:
+            #get data from sync table
+            cur.execute("""SELECT product_id FROM sync_products where is_synced = "False"; """)
+
+            unSyncedProducts = cur.fetchall()
+            unSyncedProductIds = [product[0] for product in unSyncedProducts]
+
+            for product_id in unSyncedProductIds:
+                try:
+                    cur.execute("""SELECT
+                        id AS product_id,
+                        productCode,
+                        productName,
+                        salePrice AS product_price,
+                        hsnCode,
+                        qtyInStock AS product_quantity_in_stock
+                        FROM products WHERE id = ? """,(product_id,))
+                    row = cur.fetchone()
+
+                    if row:
+                        product_details_to_sync = {
+                        'product_id': row[0],
+                        'product_code': row[1],
+                        'product_name': row[2],
+                        'product_price': row[3],
+                        'hsn_code': row[4],
+                        'product_quantity_in_stock': row[5]
+                    }
+
+                    sync = SyncProducts()
+
+                    if sync.start_product_synchronisation(product_details_to_sync):
+                        cur.execute("""UPDATE sync_products set is_synced= "True" where product_id = ?""",(product_id,))
+                        con.commit()
+                        print("sync completed for product ID: ",product_id)
+
+
+
+                except sqlite3.Error as e:
+                    print("SQLite error:", e)
+
+        finally:
+            if con:
+                con.close()
+
+
 
     @staticmethod
     def addVendor(vendorInfo):

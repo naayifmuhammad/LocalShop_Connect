@@ -1,5 +1,5 @@
-from models.models import Order
+from models.models import Product
 
-order = Order()
+prod = Product()
 
-order.placeOrder()
+prod.start_syncing_products()
