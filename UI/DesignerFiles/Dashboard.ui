@@ -663,20 +663,30 @@
   </action>
  </widget>
  <tabstops>
+  <tabstop>ProductCode</tabstop>
   <tabstop>Quantity</tabstop>
   <tabstop>Discount</tabstop>
   <tabstop>addItemBtn</tabstop>
   <tabstop>cancelBtn</tabstop>
   <tabstop>cartView</tabstop>
+  <tabstop>confirmBillBtn</tabstop>
+  <tabstop>cancelBillBtn</tabstop>
+  <tabstop>hamburger</tabstop>
+  <tabstop>billing</tabstop>
+  <tabstop>products</tabstop>
+  <tabstop>staff</tabstop>
+  <tabstop>analytics</tabstop>
+  <tabstop>history</tabstop>
+  <tabstop>settings</tabstop>
+  <tabstop>itemNo</tabstop>
+  <tabstop>HSNCode</tabstop>
+  <tabstop>SalePrice</tabstop>
   <tabstop>Amount</tabstop>
   <tabstop>cgst</tabstop>
   <tabstop>sgst</tabstop>
   <tabstop>igst</tabstop>
   <tabstop>totalTax</tabstop>
   <tabstop>grandTotal</tabstop>
-  <tabstop>itemNo</tabstop>
-  <tabstop>SalePrice</tabstop>
-  <tabstop>HSNCode</tabstop>
  </tabstops>
  <resources>
   <include location="../Assets/Icons/icons.qrc"/>
