@@ -1,5 +1,6 @@
-from models.models import Product
+from models.models import Locations
 
-prod = Product()
 
-prod.start_syncing_products()
+locations = Locations()
+
+print(locations.fetchCountryIdFromName("Andorra"))

@@ -85,6 +85,16 @@
           <number>1</number>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="le_shopname">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Shop Name</string>
+            </property>
+           </widget>
+          </item>
           <item row="4" column="0" colspan="2">
            <widget class="QLineEdit" name="le_password">
             <property name="inputMethodHints">
@@ -101,23 +111,31 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLineEdit" name="le_email">
-            <property name="inputMethodHints">
-             <set>Qt::ImhEmailCharactersOnly</set>
-            </property>
+          <item row="7" column="1">
+           <widget class="QComboBox" name="city_select">
             <property name="placeholderText">
-             <string>Enter email</string>
+             <string>Select City</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="le_shopname">
-            <property name="text">
-             <string/>
-            </property>
+          <item row="7" column="0">
+           <widget class="QComboBox" name="state_select">
             <property name="placeholderText">
-             <string>Shop Name</string>
+             <string>Select State</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QPushButton" name="pb_submit_btn">
+            <property name="text">
+             <string>Create account</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QPushButton" name="pb_gotoLogin">
+            <property name="text">
+             <string>Already have an account? Login</string>
             </property>
            </widget>
           </item>
@@ -128,33 +146,6 @@
             </property>
             <property name="placeholderText">
              <string>Enter username</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="le_phone_number">
-            <property name="inputMethodHints">
-             <set>Qt::ImhDigitsOnly|Qt::ImhPreferNumbers</set>
-            </property>
-            <property name="maxLength">
-             <number>10</number>
-            </property>
-            <property name="placeholderText">
-             <string>Phone Number</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QPushButton" name="pb_submit_btn">
-            <property name="text">
-             <string>Create account</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QPushButton" name="pb_gotoLogin">
-            <property name="text">
-             <string>Already have an account? Login</string>
             </property>
            </widget>
           </item>
@@ -171,7 +162,7 @@
             </property>
            </widget>
           </item>
-          <item row="7" column="0" colspan="2">
+          <item row="9" column="0" colspan="2">
            <widget class="QLabel" name="label_error_message">
             <property name="maximumSize">
              <size>
@@ -187,6 +178,36 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLineEdit" name="le_email">
+            <property name="inputMethodHints">
+             <set>Qt::ImhEmailCharactersOnly</set>
+            </property>
+            <property name="placeholderText">
+             <string>Enter email</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="le_phone_number">
+            <property name="inputMethodHints">
+             <set>Qt::ImhDigitsOnly|Qt::ImhPreferNumbers</set>
+            </property>
+            <property name="maxLength">
+             <number>10</number>
+            </property>
+            <property name="placeholderText">
+             <string>Phone Number</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0" colspan="2">
+           <widget class="QComboBox" name="country_select">
+            <property name="placeholderText">
+             <string>Select Country</string>
             </property>
            </widget>
           </item>
@@ -222,6 +243,9 @@
   <tabstop>le_phone_number</tabstop>
   <tabstop>le_password</tabstop>
   <tabstop>le_confirm_pssword</tabstop>
+  <tabstop>country_select</tabstop>
+  <tabstop>state_select</tabstop>
+  <tabstop>city_select</tabstop>
   <tabstop>pb_submit_btn</tabstop>
   <tabstop>pb_gotoLogin</tabstop>
  </tabstops>

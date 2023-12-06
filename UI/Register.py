@@ -1,4 +1,4 @@
-from models.models import User
+from models.models import User, Locations
 from UI.UI_Manager import UI_Manager
 from configurations.Config import Config
 from extras.UI_Functionalities import FrameLessWindow
@@ -25,6 +25,31 @@ class RegisterWindow(FrameLessWindow):
         self.ui.pb_gotoLogin.clicked.connect(self.gotoLogin)
         self.ui.pb_submit_btn.clicked.connect(self.register)
 
+
+        #populate UI combo boxes:
+        self.locs = Locations()
+        self.ui.country_select.addItems(self.locs.fetchCountries())
+        self.ui.country_select.currentIndexChanged.connect(self.countryChanged)
+        self.ui.state_select.currentIndexChanged.connect(self.stateChanged)
+
+    def countryChanged(self):
+        try:
+            self.ui.state_select.clear()
+            country_id = self.locs.fetchCountryIdFromName(self.ui.country_select.currentText())
+            self.ui.state_select.addItems(self.locs.fetchStates(int(country_id)))
+        except TypeError:
+            pass
+
+
+
+    def stateChanged(self):
+        try:
+            self.ui.city_select.clear()
+            state_id = self.locs.fetchStateIdFromName(self.ui.state_select.currentText())
+            self.ui.city_select.addItems(self.locs.fetchCities(int(state_id)))
+        except TypeError:
+            pass
+
     def setComponents(self,loginWindow):
         self.loginWindow = loginWindow
 
@@ -45,7 +70,7 @@ class RegisterWindow(FrameLessWindow):
 
 
     def register(self):
-        userinfo = (self.ui.le_username.text(),self.ui.le_email.text(),self.ui.le_phone_number.text(),self.ui.le_shopname.text(),self.ui.le_password.text())
+        userinfo = (self.ui.le_username.text(),self.ui.le_email.text(),self.ui.le_phone_number.text(),self.ui.le_shopname.text(),self.ui.le_password.text(),self.ui.city_select.currentText())
         if not self.validInput(userinfo):
             return False
         if User.register(userinfo):
@@ -93,6 +118,8 @@ class RegisterWindow(FrameLessWindow):
             if field == "":
                 flag = True
             if self.ui.le_confirm_pssword.text() == "":
+                flag = True
+            if self.ui.city_select.currentIndex()==-1:
                 flag = True
         return flag
 

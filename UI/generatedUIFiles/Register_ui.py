@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
-    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_RegisterWindow(object):
     def setupUi(self, RegisterWindow):
@@ -61,6 +61,11 @@ class Ui_RegisterWindow(object):
         self.frame.setLineWidth(1)
         self.gridLayout_2 = QGridLayout(self.frame)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.le_shopname = QLineEdit(self.frame)
+        self.le_shopname.setObjectName(u"le_shopname")
+
+        self.gridLayout_2.addWidget(self.le_shopname, 0, 1, 1, 1)
+
         self.le_password = QLineEdit(self.frame)
         self.le_password.setObjectName(u"le_password")
         self.le_password.setInputMethodHints(Qt.ImhNoAutoUppercase|Qt.ImhNoPredictiveText|Qt.ImhSensitiveData)
@@ -68,38 +73,30 @@ class Ui_RegisterWindow(object):
 
         self.gridLayout_2.addWidget(self.le_password, 4, 0, 1, 2)
 
-        self.le_email = QLineEdit(self.frame)
-        self.le_email.setObjectName(u"le_email")
-        self.le_email.setInputMethodHints(Qt.ImhEmailCharactersOnly)
+        self.city_select = QComboBox(self.frame)
+        self.city_select.setObjectName(u"city_select")
 
-        self.gridLayout_2.addWidget(self.le_email, 3, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.city_select, 7, 1, 1, 1)
 
-        self.le_shopname = QLineEdit(self.frame)
-        self.le_shopname.setObjectName(u"le_shopname")
+        self.state_select = QComboBox(self.frame)
+        self.state_select.setObjectName(u"state_select")
 
-        self.gridLayout_2.addWidget(self.le_shopname, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.state_select, 7, 0, 1, 1)
+
+        self.pb_submit_btn = QPushButton(self.frame)
+        self.pb_submit_btn.setObjectName(u"pb_submit_btn")
+
+        self.gridLayout_2.addWidget(self.pb_submit_btn, 8, 0, 1, 1)
+
+        self.pb_gotoLogin = QPushButton(self.frame)
+        self.pb_gotoLogin.setObjectName(u"pb_gotoLogin")
+
+        self.gridLayout_2.addWidget(self.pb_gotoLogin, 8, 1, 1, 1)
 
         self.le_username = QLineEdit(self.frame)
         self.le_username.setObjectName(u"le_username")
 
         self.gridLayout_2.addWidget(self.le_username, 0, 0, 1, 1)
-
-        self.le_phone_number = QLineEdit(self.frame)
-        self.le_phone_number.setObjectName(u"le_phone_number")
-        self.le_phone_number.setInputMethodHints(Qt.ImhDigitsOnly|Qt.ImhPreferNumbers)
-        self.le_phone_number.setMaxLength(10)
-
-        self.gridLayout_2.addWidget(self.le_phone_number, 3, 1, 1, 1)
-
-        self.pb_submit_btn = QPushButton(self.frame)
-        self.pb_submit_btn.setObjectName(u"pb_submit_btn")
-
-        self.gridLayout_2.addWidget(self.pb_submit_btn, 6, 0, 1, 1)
-
-        self.pb_gotoLogin = QPushButton(self.frame)
-        self.pb_gotoLogin.setObjectName(u"pb_gotoLogin")
-
-        self.gridLayout_2.addWidget(self.pb_gotoLogin, 6, 1, 1, 1)
 
         self.le_confirm_pssword = QLineEdit(self.frame)
         self.le_confirm_pssword.setObjectName(u"le_confirm_pssword")
@@ -113,7 +110,25 @@ class Ui_RegisterWindow(object):
         self.label_error_message.setStyleSheet(u"color:red")
         self.label_error_message.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_2.addWidget(self.label_error_message, 7, 0, 1, 2)
+        self.gridLayout_2.addWidget(self.label_error_message, 9, 0, 1, 2)
+
+        self.le_email = QLineEdit(self.frame)
+        self.le_email.setObjectName(u"le_email")
+        self.le_email.setInputMethodHints(Qt.ImhEmailCharactersOnly)
+
+        self.gridLayout_2.addWidget(self.le_email, 3, 0, 1, 1)
+
+        self.le_phone_number = QLineEdit(self.frame)
+        self.le_phone_number.setObjectName(u"le_phone_number")
+        self.le_phone_number.setInputMethodHints(Qt.ImhDigitsOnly|Qt.ImhPreferNumbers)
+        self.le_phone_number.setMaxLength(10)
+
+        self.gridLayout_2.addWidget(self.le_phone_number, 3, 1, 1, 1)
+
+        self.country_select = QComboBox(self.frame)
+        self.country_select.setObjectName(u"country_select")
+
+        self.gridLayout_2.addWidget(self.country_select, 6, 0, 1, 2)
 
 
         self.verticalLayout.addWidget(self.frame)
@@ -136,7 +151,10 @@ class Ui_RegisterWindow(object):
         QWidget.setTabOrder(self.le_email, self.le_phone_number)
         QWidget.setTabOrder(self.le_phone_number, self.le_password)
         QWidget.setTabOrder(self.le_password, self.le_confirm_pssword)
-        QWidget.setTabOrder(self.le_confirm_pssword, self.pb_submit_btn)
+        QWidget.setTabOrder(self.le_confirm_pssword, self.country_select)
+        QWidget.setTabOrder(self.country_select, self.state_select)
+        QWidget.setTabOrder(self.state_select, self.city_select)
+        QWidget.setTabOrder(self.city_select, self.pb_submit_btn)
         QWidget.setTabOrder(self.pb_submit_btn, self.pb_gotoLogin)
 
         self.retranslateUi(RegisterWindow)
@@ -147,18 +165,21 @@ class Ui_RegisterWindow(object):
     def retranslateUi(self, RegisterWindow):
         RegisterWindow.setWindowTitle(QCoreApplication.translate("RegisterWindow", u"MainWindow", None))
         self.label_Register_heading.setText(QCoreApplication.translate("RegisterWindow", u"REGISTER", None))
-        self.le_password.setText("")
-        self.le_password.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Enter secure password", None))
-        self.le_email.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Enter email", None))
         self.le_shopname.setText("")
         self.le_shopname.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Shop Name", None))
-        self.le_username.setText("")
-        self.le_username.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Enter username", None))
-        self.le_phone_number.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Phone Number", None))
+        self.le_password.setText("")
+        self.le_password.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Enter secure password", None))
+        self.city_select.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Select City", None))
+        self.state_select.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Select State", None))
         self.pb_submit_btn.setText(QCoreApplication.translate("RegisterWindow", u"Create account", None))
         self.pb_gotoLogin.setText(QCoreApplication.translate("RegisterWindow", u"Already have an account? Login", None))
+        self.le_username.setText("")
+        self.le_username.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Enter username", None))
         self.le_confirm_pssword.setText("")
         self.le_confirm_pssword.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Confirm Password", None))
         self.label_error_message.setText("")
+        self.le_email.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Enter email", None))
+        self.le_phone_number.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Phone Number", None))
+        self.country_select.setPlaceholderText(QCoreApplication.translate("RegisterWindow", u"Select Country", None))
     # retranslateUi
 

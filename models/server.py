@@ -2,17 +2,11 @@ from models import db_connection
 
 
 class Shop:
-    def __init__(self, data_to_insert):
-        self.shop_data = {
-            'shop_name': data_to_insert['shop_name'],
-            'password': data_to_insert['password'],
-            'geolocation': data_to_insert['geolocation'],
-            'phone_number': data_to_insert['phone_number'],
-            'email': data_to_insert['email'],
-            'owner_name': data_to_insert['owner_name'],
-        }
+    def __init__(self):
+        pass
 
-    def add_new_shop(self):
+    def add_new_shop(self,shopInfo):
+        print(shopInfo)
         try:
             # Connect to the database
             connection = db_connection.serverDB.connect()
@@ -23,20 +17,11 @@ class Shop:
 
                 insert_query = """
                     INSERT INTO shop_information (
-                        shop_name, password, geolocation, phone_number, email,
-                        owner_name
+                        owner_name, email, phone_number, shop_name, password,geolocation) VALUES (?, ?, ?, ?, ?, ?)
                     ) VALUES (?, ?, ?, ?, ?, ?)
                 """
-
                 # Execute the query with data from the self.shop_data dictionary
-                cursor.execute(insert_query, (
-                    self.shop_data['shop_name'],
-                    self.shop_data['password'],
-                    self.shop_data['geolocation'],
-                    self.shop_data['phone_number'],
-                    self.shop_data['email'],
-                    self.shop_data['owner_name']
-                ))
+                cursor.execute(insert_query, shopInfo)
 
                 # Commit the changes to the database
                 connection.commit()
@@ -109,4 +94,5 @@ class SyncProducts:
                     pass  # CMySQLCursorPrepared object has no attribute 'close'
 
             db_connection.serverDB.disconnect(connection)
+
 

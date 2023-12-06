@@ -1,33 +1,39 @@
 import sqlite3
 import re
 from datetime import datetime
-from models.server import SyncProducts
+from models.server import SyncProducts, Shop
 
 con = sqlite3.connect("localShopConnectDB.db")
 cur = con.cursor()
 
-
 class User:
     def __init__(self):
         cur.execute("""CREATE TABLE IF NOT EXISTS "user_table" (
-        "id"	INTEGER NOT NULL,
-        "username"	TEXT NOT NULL UNIQUE,
-        "email"	TEXT NOT NULL UNIQUE,
-        "phone_number"	INTEGER NOT NULL UNIQUE,
-        "shop_name"	TEXT NOT NULL,
-        "password"	TEXT NOT NULL,
-        "status"	INTEGER NOT NULL DEFAULT 0,
-        PRIMARY KEY("id" AUTOINCREMENT)
-        )""")
+	"id"	INTEGER NOT NULL,
+	"username"	TEXT NOT NULL UNIQUE,
+	"email"	TEXT NOT NULL UNIQUE,
+	"phone_number"	INTEGER NOT NULL UNIQUE,
+	"shop_name"	TEXT NOT NULL,
+	"password"	TEXT NOT NULL,
+	"status"	INTEGER NOT NULL DEFAULT 0,
+	"location"	TEXT NOT NULL DEFAULT ' ',
+	PRIMARY KEY("id" AUTOINCREMENT),
+	FOREIGN KEY("location") REFERENCES "cities"("city_name")
+)""")
 
     @staticmethod
     def register(userinfo):
         try:
-            cur.execute("""insert into user_table (username,email,phone_number,shop_name,password) values(?,?,?,?,?)""", userinfo)
+            cur.execute("""insert into user_table (username,email,phone_number,shop_name,password,location) values(?,?,?,?,?,?)""", userinfo)
             con.commit()
+            shop = Shop()
+            shop.add_new_shop(userinfo)
+
+
         except sqlite3.Error as error:
             return False
         return True
+
 
     @staticmethod
     def login(loginInfo):
@@ -375,4 +381,68 @@ class Order:
             print(error)
             return False, error
         return True
+
+class Locations:
+    def __init__(self):
+        cur.execute("""CREATE TABLE IF NOT EXISTS "countries" (
+	"id"	INTEGER NOT NULL,
+	"country_name"	TEXT NOT NULL UNIQUE,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)""")
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS "states" (
+	"id"	INTEGER NOT NULL,
+	"state_name"	TEXT NOT NULL,
+	"country_id"	INTEGER NOT NULL,
+	FOREIGN KEY("country_id") REFERENCES "countries"("id"),
+	PRIMARY KEY("id" AUTOINCREMENT)
+)""")
+
+        cur.execute("""CREATE TABLE IF NOT EXISTS "cities" (
+	"id"	INTEGER NOT NULL,
+	"city_name"	TEXT,
+	"state_id"	TEXT NOT NULL,
+	FOREIGN KEY("state_id") REFERENCES "states"("id"),
+	PRIMARY KEY("id" AUTOINCREMENT)
+)""")
+
+    @staticmethod
+    def fetchCountries():
+        cur.execute("""SELECT country_name FROM countries;""")
+        rows = cur.fetchall()
+        data = [row[0] for row in rows]
+        return data
+
+    @staticmethod
+    def fetchStates(country_id):
+        print(country_id)
+        cur.execute("""SELECT state_name FROM states where country_id = ?;""",(country_id,))
+        rows = cur.fetchall()
+        data = [row[0] for row in rows]
+        return data
+
+
+    @staticmethod
+    def fetchCities(state_id):
+        print(state_id)
+        cur.execute("""SELECT city_name FROM cities where state_id = ?;""",(state_id,))
+        rows = cur.fetchall()
+        data = [row[0] for row in rows]
+        return data
+
+
+
+    @staticmethod
+    def fetchCountryIdFromName(country_name):
+        cur.execute("""SELECT id FROM countries where country_name = ?;""",(country_name,))
+        rows = cur.fetchone()
+        data = rows[0]
+        return data
+
+    @staticmethod
+    def fetchStateIdFromName(state_name):
+        cur.execute("""SELECT id FROM states where state_name = ?;""",(state_name,))
+        rows = cur.fetchone()
+        data = rows[0]
+        return data
 
