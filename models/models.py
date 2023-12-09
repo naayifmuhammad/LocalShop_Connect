@@ -179,12 +179,12 @@ class Product:
 
             # Commit the transaction
             con.commit()
-
             # Get the last inserted row ID (product ID)
             product_id = cur.lastrowid
 
             # Call the function to add to sync_products table
             Product.add_to_sync_products_table(product_id)
+            Product.start_syncing_products()
 
         except sqlite3.Error as error:
             return False

@@ -5,7 +5,7 @@ class Shop:
     def __init__(self):
         pass
 
-    def add_new_shop(self,shopInfo):
+    def add_new_shop(self, shopInfo):
         print(shopInfo)
         try:
             # Connect to the database
@@ -16,9 +16,7 @@ class Shop:
                 cursor = connection.cursor(prepared=True)
 
                 insert_query = """
-                    INSERT INTO shop_information (
-                        owner_name, email, phone_number, shop_name, password,geolocation) VALUES (?, ?, ?, ?, ?, ?)
-                    ) VALUES (?, ?, ?, ?, ?, ?)
+                    INSERT INTO shop_information (owner_name, email, phone_number, shop_name, password, geolocation) VALUES (?, ?, ?, ?, ?, ?)
                 """
                 # Execute the query with data from the self.shop_data dictionary
                 cursor.execute(insert_query, shopInfo)
@@ -29,17 +27,14 @@ class Shop:
                 print('Data inserted successfully')
 
         except Exception as e:
-            print(f'Error: {e}')
+            print(f"Error: {e}")
 
         finally:
-            # Close the cursor and disconnect from the database in a finally block
-            if 'cursor' in locals() and cursor is not None:
-                try:
-                    cursor.close()
-                except AttributeError:
-                    pass  # CMySQLCursorPrepared object has no attribute 'close'
+            if connection is not None:
+                # Close the connection
+                connection.close()
+                print('Connection closed')
 
-            db_connection.serverDB.disconnect(connection)
 
 class SyncProducts:
     def __init__(self):
